@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Infinite Stock | Productos en tendencia</title>
   <meta name="description" content="Infinite Stock — Los productos más buscados del momento, al mejor precio y con envío seguro a todo el país." />
+  <meta name="theme-color" content="#0b0a10">
+  <meta property="og:title" content="Infinite Stock | Productos en tendencia" />
+  <meta property="og:description" content="Los productos más buscados del momento con hasta 50% OFF, envío express 24/48h y atención personalizada." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://infinitstock.netlify.app" />
+  <meta property="og:image" content="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 630%22><rect fill=%22%230b0a10%22 width=%221200%22 height=%22630%22/><text x=%22600%22 y=%22315%22 font-size=%22120%22 fill=%22%23cda257%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>∞ Infinite Stock</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -116,7 +122,7 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" src="assets/img/productos/pasamontana.jpg" alt="Pasamontaña" />
+          <img class="card__image" loading="lazy" src="assets/img/productos/pasamontana.jpg" alt="Pasamontaña" />
           <div class="card__body">
             <h3 class="card__title">Pasamontaña</h3>
             <div class="card__price">
@@ -131,7 +137,7 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" src="assets/img/productos/soporte-tv.jpg" alt="Soporte para TV" />
+          <img class="card__image" loading="lazy" src="assets/img/productos/soporte-tv.jpg" alt="Soporte para TV" />
           <div class="card__body">
             <h3 class="card__title">Soporte para TV</h3>
             <div class="card__price">
@@ -148,7 +154,7 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" src="assets/img/productos/cargador-time.jpg" alt="Cargador TIME 45W" />
+          <img class="card__image" loading="lazy" src="assets/img/productos/cargador-time.jpg" alt="Cargador TIME 45W" />
           <div class="card__body">
             <h3 class="card__title">Cargador TIME 45W</h3>
             <div class="card__price">
@@ -165,7 +171,7 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--new">✨ Nuevo</span>
-          <img class="card__image" src="assets/img/productos/cables-usb.jpg" alt="Cable USB TIME" />
+          <img class="card__image" loading="lazy" src="assets/img/productos/cables-usb.jpg" alt="Cable USB TIME" />
           <div class="card__body">
             <h3 class="card__title">Cable USB TIME</h3>
             <div class="card__price">
@@ -180,7 +186,7 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--sale">⚡ Stock limitado</span>
-          <img class="card__image" src="assets/img/productos/led-neon.jpg" alt="Tira LED NEON" />
+          <img class="card__image" loading="lazy" src="assets/img/productos/led-neon.jpg" alt="Tira LED NEON" />
           <div class="card__body">
             <h3 class="card__title">Tira LED NEON 5M</h3>
             <div class="card__price">
@@ -199,15 +205,57 @@
     </div>
   </section>
 
+  <!-- ===== TESTIMONIOS ===== -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-heading__tag">Clientes reales</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+        <p>Más de 5.000 compras satisfechas en todo el país.</p>
+      </div>
+
+      <div class="testimonials__grid">
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"Excelente calidad, llegó rápido y bien embalado. Superó mis expectativas."</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">María López</span>
+            <span class="testimonial__location">CABA</span>
+          </div>
+        </div>
+
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"El trato fue increíble, me asesoraron bien y el producto es exactamente como lo esperaba."</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">Juan García</span>
+            <span class="testimonial__location">Córdoba</span>
+          </div>
+        </div>
+
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"Mejor que otros sitios. Precios justos y atención personalizada. ¡Recomendado!"</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">Ana Martínez</span>
+            <span class="testimonial__location">Rosario</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CTA FINAL ===== -->
   <section class="cta">
     <div class="container cta__inner reveal">
+      <span class="cta__urgency">⏰ OFERTAS POR TIEMPO LIMITADO</span>
       <h2>¿Todavía dudás? Aprovechá el stock antes de que vuele</h2>
       <p>Escribinos ahora y te asesoramos para elegir el producto ideal para vos.</p>
-      <a class="btn btn--lg btn--whatsapp" target="_blank" rel="noopener"
+      <a class="btn btn--lg btn--urgent pulse" target="_blank" rel="noopener"
          href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos">
-        <span>🟢</span> Hablar por WhatsApp
+        <span>🔥</span> COMPRAR AHORA
       </a>
+      <p class="cta__secondary">O llama al <strong>+54 9 261 337-2398</strong></p>
     </div>
   </section>
 

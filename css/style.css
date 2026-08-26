@@ -657,6 +657,137 @@ h1, h2, h3, h4 {
 }
 
 /* =========================================================
+   TESTIMONIOS
+   ========================================================= */
+
+.testimonials {
+  background: var(--bg);
+  padding: 90px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.testimonial {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.testimonial:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+}
+
+.testimonial__stars {
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.testimonial__text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.testimonial__author {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.testimonial__name {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.testimonial__location {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== CTA URGENCIA ===== */
+
+.cta__urgency {
+  display: inline-block;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+.btn--urgent {
+  background: linear-gradient(135deg, #ef4444, #f97316) !important;
+  color: var(--white) !important;
+  font-size: 1.15rem !important;
+  padding: 18px 40px !important;
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.45) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--urgent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.4s ease;
+}
+
+.btn--urgent:hover::before {
+  left: 100%;
+}
+
+.btn--urgent:hover {
+  box-shadow: 0 16px 36px rgba(239, 68, 68, 0.6) !important;
+}
+
+.btn--urgent.pulse {
+  animation: pulse-btn 2s ease-in-out infinite;
+}
+
+.cta__secondary {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-btn {
+  0%, 100% {
+    box-shadow: 0 12px 28px rgba(239, 68, 68, 0.45);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 16px 36px rgba(239, 68, 68, 0.6);
+    transform: scale(1.02);
+  }
+}
+
+/* =========================================================
    SCROLL REVEAL
    ========================================================= */
 
