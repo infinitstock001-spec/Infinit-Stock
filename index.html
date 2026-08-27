@@ -13,11 +13,13 @@
   <meta property="og:image" content="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 630%22><rect fill=%22%230b0a10%22 width=%221200%22 height=%22630%22/><text x=%22600%22 y=%22315%22 font-size=%22120%22 fill=%22%23cda257%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>∞ Infinite Stock</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♾️</text></svg>">
 </head>
 <body>
+
+  <a href="#main" class="skip-link">Saltar al contenido</a>
 
   <!-- ===== NAVBAR ===== -->
   <header class="navbar" id="navbar">
@@ -28,10 +30,11 @@
       </a>
 
       <nav class="navbar__nav" id="navbar-nav">
-        <a href="#inicio" class="navbar__link">Inicio</a>
-        <a href="#productos" class="navbar__link">Productos</a>
-        <a href="#ofertas" class="navbar__link">Ofertas</a>
-        <a href="#contacto" class="navbar__link">Contacto</a>
+        <a href="#inicio" class="navbar__link" data-nav-link>Inicio</a>
+        <a href="#productos" class="navbar__link" data-nav-link>Productos</a>
+        <a href="#como-comprar" class="navbar__link" data-nav-link>Cómo comprar</a>
+        <a href="#ofertas" class="navbar__link" data-nav-link>Ofertas</a>
+        <a href="#contacto" class="navbar__link" data-nav-link>Contacto</a>
         <a href="#productos" class="btn btn--sm btn--primary navbar__cta">Comprar ahora</a>
       </nav>
 
@@ -41,8 +44,15 @@
     </div>
   </header>
 
+  <main id="main">
+
   <!-- ===== HERO ===== -->
   <section class="hero" id="inicio">
+    <div class="hero__aurora" aria-hidden="true">
+      <span class="hero__aurora-blob hero__aurora-blob--1"></span>
+      <span class="hero__aurora-blob hero__aurora-blob--2"></span>
+      <span class="hero__aurora-blob hero__aurora-blob--3"></span>
+    </div>
     <div class="hero__glow"></div>
     <div class="container hero__inner">
       <span class="badge badge--hero">🔥 Lo más vendido de la semana</span>
@@ -54,13 +64,13 @@
         envío seguro a todo el país y atención personalizada. Comprar nunca fue tan fácil.
       </p>
       <div class="hero__actions">
-        <a href="#productos" class="btn btn--lg btn--primary">Comprar Ahora</a>
+        <a href="#productos" class="btn btn--lg btn--primary btn--shine">Comprar Ahora</a>
         <a href="#ofertas" class="btn btn--lg btn--ghost">Ver ofertas 🔥</a>
       </div>
 
       <div class="hero__stats">
         <div class="hero__stat">
-          <strong>+5.000</strong>
+          <strong><span class="counter" data-target="5000" data-prefix="+">0</span></strong>
           <span>Clientes felices</span>
         </div>
         <div class="hero__stat">
@@ -68,12 +78,32 @@
           <span>Envío express</span>
         </div>
         <div class="hero__stat">
-          <strong>4.9★</strong>
+          <strong><span class="counter" data-target="4.9" data-decimals="1">0</span>★</strong>
           <span>Calificación promedio</span>
         </div>
       </div>
+
+      <a href="#productos" class="hero__scroll-cue" aria-label="Ir a productos">
+        <span></span>
+      </a>
     </div>
   </section>
+
+  <!-- ===== BARRA DE CONFIANZA (MARQUEE) ===== -->
+  <div class="marquee">
+    <div class="marquee__track">
+      <span>🚚 Envío a todo el país</span>
+      <span>🔒 Pago 100% seguro</span>
+      <span>⭐ +5.000 clientes felices</span>
+      <span>🔄 Cambios sin cargo</span>
+      <span>⚡ Stock limitado</span>
+      <span>🚚 Envío a todo el país</span>
+      <span>🔒 Pago 100% seguro</span>
+      <span>⭐ +5.000 clientes felices</span>
+      <span>🔄 Cambios sin cargo</span>
+      <span>⚡ Stock limitado</span>
+    </div>
+  </div>
 
   <!-- ===== BENEFICIOS ===== -->
   <section class="benefits">
@@ -122,13 +152,19 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" loading="lazy" src="assets/img/productos/pasamontana.jpg" alt="Pasamontaña" />
+          <div class="card__image-wrap">
+            <img class="card__image" loading="lazy" src="assets/img/productos/pasamontana.jpg" alt="Pasamontaña" />
+          </div>
           <div class="card__body">
             <h3 class="card__title">Pasamontaña</h3>
+            <div class="card__rating" aria-label="Calificación 4.8 de 5">
+              <span class="card__stars">★★★★★</span>
+              <span class="card__rating-count">4.8 (96)</span>
+            </div>
             <div class="card__price">
               <span class="card__price-new">$4.500</span>
             </div>
-            <a class="btn btn--whatsapp" target="_blank" rel="noopener"
+            <a class="btn btn--whatsapp btn--shine" target="_blank" rel="noopener"
                href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20comprar%20el%20Pasamonta%C3%B1a">
               <span>🟢</span> Comprar por WhatsApp
             </a>
@@ -137,15 +173,21 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" loading="lazy" src="assets/img/productos/soporte-tv.jpg" alt="Soporte para TV" />
+          <div class="card__image-wrap">
+            <img class="card__image" loading="lazy" src="assets/img/productos/soporte-tv.jpg" alt="Soporte para TV" />
+          </div>
           <div class="card__body">
             <h3 class="card__title">Soporte para TV</h3>
+            <div class="card__rating" aria-label="Calificación 4.7 de 5">
+              <span class="card__stars">★★★★★</span>
+              <span class="card__rating-count">4.7 (214)</span>
+            </div>
             <div class="card__price">
               <span class="card__price-old">$11.750</span>
               <span class="card__price-new">$9.990</span>
               <span class="card__discount">-15%</span>
             </div>
-            <a class="btn btn--whatsapp" target="_blank" rel="noopener"
+            <a class="btn btn--whatsapp btn--shine" target="_blank" rel="noopener"
                href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20comprar%20el%20Soporte%20para%20TV">
               <span>🟢</span> Comprar por WhatsApp
             </a>
@@ -154,15 +196,22 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--trend">🔥 Tendencia</span>
-          <img class="card__image" loading="lazy" src="assets/img/productos/cargador-time.jpg" alt="Cargador TIME 45W" />
+          <div class="card__image-wrap">
+            <img class="card__image" loading="lazy" src="assets/img/productos/cargador-time.jpg" alt="Cargador TIME 45W" />
+          </div>
           <div class="card__body">
             <h3 class="card__title">Cargador TIME 45W</h3>
+            <div class="card__rating" aria-label="Calificación 4.9 de 5">
+              <span class="card__stars">★★★★★</span>
+              <span class="card__rating-count">4.9 (341)</span>
+            </div>
             <div class="card__price">
               <span class="card__price-old">$18.738</span>
               <span class="card__price-new">$14.990</span>
               <span class="card__discount">-20%</span>
             </div>
-            <a class="btn btn--whatsapp" target="_blank" rel="noopener"
+            <p class="card__urgency">⚡ ¡Últimas unidades disponibles!</p>
+            <a class="btn btn--whatsapp btn--shine" target="_blank" rel="noopener"
                href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20comprar%20el%20Cargador%20TIME%2045W">
               <span>🟢</span> Comprar por WhatsApp
             </a>
@@ -171,13 +220,19 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--new">✨ Nuevo</span>
-          <img class="card__image" loading="lazy" src="assets/img/productos/cables-usb.jpg" alt="Cable USB TIME" />
+          <div class="card__image-wrap">
+            <img class="card__image" loading="lazy" src="assets/img/productos/cables-usb.jpg" alt="Cable USB TIME" />
+          </div>
           <div class="card__body">
             <h3 class="card__title">Cable USB TIME</h3>
+            <div class="card__rating" aria-label="Calificación 4.6 de 5">
+              <span class="card__stars">★★★★★</span>
+              <span class="card__rating-count">4.6 (178)</span>
+            </div>
             <div class="card__price">
               <span class="card__price-new">$2.999</span>
             </div>
-            <a class="btn btn--whatsapp" target="_blank" rel="noopener"
+            <a class="btn btn--whatsapp btn--shine" target="_blank" rel="noopener"
                href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20comprar%20el%20Cable%20USB%20TIME">
               <span>🟢</span> Comprar por WhatsApp
             </a>
@@ -186,15 +241,22 @@
 
         <article class="card reveal" data-tilt>
           <span class="card__badge card__badge--sale">⚡ Stock limitado</span>
-          <img class="card__image" loading="lazy" src="assets/img/productos/led-neon.jpg" alt="Tira LED NEON" />
+          <div class="card__image-wrap">
+            <img class="card__image" loading="lazy" src="assets/img/productos/led-neon.jpg" alt="Tira LED NEON" />
+          </div>
           <div class="card__body">
             <h3 class="card__title">Tira LED NEON 5M</h3>
+            <div class="card__rating" aria-label="Calificación 4.9 de 5">
+              <span class="card__stars">★★★★★</span>
+              <span class="card__rating-count">4.9 (502)</span>
+            </div>
             <div class="card__price">
               <span class="card__price-old">$19.998</span>
               <span class="card__price-new">$14.999</span>
               <span class="card__discount">-25%</span>
             </div>
-            <a class="btn btn--whatsapp" target="_blank" rel="noopener"
+            <p class="card__urgency">⚡ ¡Solo quedan 6 unidades!</p>
+            <a class="btn btn--whatsapp btn--shine" target="_blank" rel="noopener"
                href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20comprar%20la%20Tira%20LED%20NEON%205M">
               <span>🟢</span> Comprar por WhatsApp
             </a>
@@ -205,10 +267,39 @@
     </div>
   </section>
 
+  <!-- ===== CÓMO COMPRAR ===== -->
+  <section class="steps" id="como-comprar">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="section-heading__tag">Es muy fácil</span>
+        <h2>Cómo comprar en 3 pasos</h2>
+        <p>Del clic a tu casa, sin vueltas.</p>
+      </div>
+
+      <div class="steps__grid">
+        <div class="step reveal">
+          <span class="step__number">1</span>
+          <h3>Elegí tu producto</h3>
+          <p>Explorá el catálogo y encontrá lo que estás buscando entre nuestros productos en tendencia.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__number">2</span>
+          <h3>Coordiná por WhatsApp</h3>
+          <p>Te asesoramos al instante y confirmamos stock, precio final y forma de envío.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__number">3</span>
+          <h3>Recibilo en tu casa</h3>
+          <p>Envío en 24/48hs a todo el país, con seguimiento en tiempo real hasta la puerta de tu casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== TESTIMONIOS ===== -->
   <section class="testimonials">
     <div class="container">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <span class="section-heading__tag">Clientes reales</span>
         <h2>Lo que dicen nuestros clientes</h2>
         <p>Más de 5.000 compras satisfechas en todo el país.</p>
@@ -219,8 +310,11 @@
           <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
           <p class="testimonial__text">"Excelente calidad, llegó rápido y bien embalado. Superó mis expectativas."</p>
           <div class="testimonial__author">
-            <span class="testimonial__name">María López</span>
-            <span class="testimonial__location">CABA</span>
+            <span class="testimonial__avatar">ML</span>
+            <div>
+              <span class="testimonial__name">María López</span>
+              <span class="testimonial__location">CABA</span>
+            </div>
           </div>
         </div>
 
@@ -228,8 +322,11 @@
           <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
           <p class="testimonial__text">"El trato fue increíble, me asesoraron bien y el producto es exactamente como lo esperaba."</p>
           <div class="testimonial__author">
-            <span class="testimonial__name">Juan García</span>
-            <span class="testimonial__location">Córdoba</span>
+            <span class="testimonial__avatar">JG</span>
+            <div>
+              <span class="testimonial__name">Juan García</span>
+              <span class="testimonial__location">Córdoba</span>
+            </div>
           </div>
         </div>
 
@@ -237,8 +334,74 @@
           <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
           <p class="testimonial__text">"Mejor que otros sitios. Precios justos y atención personalizada. ¡Recomendado!"</p>
           <div class="testimonial__author">
-            <span class="testimonial__name">Ana Martínez</span>
-            <span class="testimonial__location">Rosario</span>
+            <span class="testimonial__avatar">AM</span>
+            <div>
+              <span class="testimonial__name">Ana Martínez</span>
+              <span class="testimonial__location">Rosario</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="section-heading__tag">Dudas frecuentes</span>
+        <h2>Preguntas frecuentes</h2>
+        <p>Todo lo que necesitás saber antes de comprar.</p>
+      </div>
+
+      <div class="faq__list reveal">
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span>¿Cuánto demora el envío?</span>
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Los envíos demoran entre 24 y 48 horas a todo el país, con seguimiento en tiempo real desde que se despacha tu pedido.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span>¿Qué métodos de pago aceptan?</span>
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Aceptamos transferencia bancaria, efectivo y Mercado Pago. Coordinamos el método que más te convenga por WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span>¿Puedo cambiar o devolver un producto?</span>
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Sí. Si tu producto presenta una falla de fábrica, tenés 48hs desde la recepción para escribirnos y coordinar el cambio sin cargo.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span>¿Hacen envíos a todo el país?</span>
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Sí, enviamos a todas las provincias de Argentina con empresas de transporte y seguimiento en tiempo real.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span>¿Cómo hago mi pedido?</span>
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__answer">
+            <p>Elegís tu producto y tocás el botón "Comprar por WhatsApp". Ahí te asesoramos, confirmamos stock y coordinamos pago y envío.</p>
           </div>
         </div>
       </div>
@@ -251,6 +414,27 @@
       <span class="cta__urgency">⏰ OFERTAS POR TIEMPO LIMITADO</span>
       <h2>¿Todavía dudás? Aprovechá el stock antes de que vuele</h2>
       <p>Escribinos ahora y te asesoramos para elegir el producto ideal para vos.</p>
+
+      <div class="countdown" id="countdown" aria-label="Tiempo restante de la oferta">
+        <span class="countdown__label">La oferta termina en</span>
+        <div class="countdown__units">
+          <div class="countdown__unit">
+            <span id="cd-hours">00</span>
+            <small>Hs</small>
+          </div>
+          <span class="countdown__sep">:</span>
+          <div class="countdown__unit">
+            <span id="cd-minutes">00</span>
+            <small>Min</small>
+          </div>
+          <span class="countdown__sep">:</span>
+          <div class="countdown__unit">
+            <span id="cd-seconds">00</span>
+            <small>Seg</small>
+          </div>
+        </div>
+      </div>
+
       <a class="btn btn--lg btn--urgent pulse" target="_blank" rel="noopener"
          href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos">
         <span>🔥</span> COMPRAR AHORA
@@ -259,8 +443,23 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="contacto">
+    <div class="footer__cta-strip reveal">
+      <div class="container footer__cta-strip-inner">
+        <div>
+          <h3>📲 Sumate a nuestra lista de ofertas exclusivas</h3>
+          <p>Enterate primero de los descuentos y lanzamientos por WhatsApp.</p>
+        </div>
+        <a class="btn btn--primary btn--shine" target="_blank" rel="noopener"
+           href="https://wa.me/5492613372398?text=Hola%2C%20quiero%20sumarme%20a%20la%20lista%20de%20ofertas%20exclusivas">
+          Quiero sumarme
+        </a>
+      </div>
+    </div>
+
     <div class="container footer__grid">
       <div class="footer__col reveal">
         <a href="#inicio" class="navbar__logo footer__logo">
@@ -281,7 +480,8 @@
         <ul class="footer__links">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#productos">Productos</a></li>
-          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#como-comprar">Cómo comprar</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
@@ -301,6 +501,11 @@
       <p>© <span id="year"></span> Infinite Stock — Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+  <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 
   <!-- ===== WHATSAPP FLOTANTE ===== -->
   <a class="whatsapp-widget"
