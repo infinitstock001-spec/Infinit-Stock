@@ -730,6 +730,14 @@ h1, h2, h3, h4 {
   text-decoration: line-through;
 }
 
+.card__price-old--hot {
+  color: #ff3b3b;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration-thickness: 2px;
+  text-shadow: 0 0 12px rgba(255, 59, 59, 0.45);
+}
+
 .card__price-new {
   font-family: var(--font-mono);
   font-size: 1.5rem;
