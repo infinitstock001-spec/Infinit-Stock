@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-vertical="mixto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula — Infinit Academy</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/academia.css">
+<link rel="stylesheet" href="../css/campus.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+
+<header class="nav is-stuck">
+  <div class="nav__in">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">IA</span>
+      <span id="navTitulo">Campus<small>Infinit Academy</small></span>
+    </a>
+    <div class="nav__cta">
+      <span class="small nowrap" style="color:var(--accent)" id="navPct">0%</span>
+      <a class="btn btn--sm btn--ghost" href="index.html">Mis cursos</a>
+    </div>
+  </div>
+</header>
+
+<section class="campus">
+  <div class="wrap">
+    <div class="aula">
+
+      <!-- ===== Video y contenido ===== -->
+      <main>
+        <div class="video-box" id="videoBox"></div>
+
+        <div class="row mt-2" style="justify-content:space-between">
+          <div>
+            <span class="tag" id="claseMod">Módulo</span>
+            <h1 class="display t-2 mt-1" id="claseTitulo">—</h1>
+            <p class="muted small" id="claseDur"></p>
+          </div>
+          <button class="btn btn--primary" id="btnVista">Marcar como vista</button>
+        </div>
+
+        <div class="row mt-2">
+          <button class="btn btn--sm btn--ghost" id="btnPrev">← Anterior</button>
+          <button class="btn btn--sm btn--ghost" id="btnNext">Siguiente →</button>
+        </div>
+
+        <div class="tabs mt-3">
+          <button class="on" data-tab="notas">Mis notas</button>
+          <button data-tab="recursos">Recursos</button>
+          <button data-tab="ayuda">Consultar</button>
+          <button data-tab="cert">Certificado</button>
+        </div>
+
+        <div class="panel on" data-panel="notas">
+          <p class="muted small">Lo que escribas queda guardado en este dispositivo, asociado a esta clase.</p>
+          <div class="field">
+            <textarea id="notas" placeholder="Anotá acá lo que no querés olvidarte de esta clase…"></textarea>
+          </div>
+          <span class="tag tag--ok hide" id="notaOk">✓ Guardado</span>
+        </div>
+
+        <div class="panel" data-panel="recursos">
+          <div class="stack" id="recursos"></div>
+        </div>
+
+        <div class="panel" data-panel="ayuda">
+          <div class="card">
+            <h3 class="display t-3 mb-1">¿Te trabaste con esta clase?</h3>
+            <p class="muted small">
+              Mandame una foto o un video corto de lo que estás practicando y te digo exactamente qué corregir.
+              Es la parte del curso que más rinde: no avances con una técnica mal agarrada.
+            </p>
+            <a class="btn btn--wa mt-2" id="waClase">Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="cert">
+          <div id="certBox"></div>
+        </div>
+      </main>
+
+      <!-- ===== Lista de clases ===== -->
+      <aside>
+        <div class="lista">
+          <div class="lista__head">
+            <div class="row" style="justify-content:space-between">
+              <b id="listaTitulo">Contenido</b>
+              <span class="tiny muted" id="listaMeta"></span>
+            </div>
+            <div class="bar"><i id="barra" style="width:0%"></i></div>
+            <span class="tiny muted" id="listaProg">0 de 0 clases</span>
+          </div>
+          <div id="listaBody"></div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<script src="../js/data.js"></script>
+<script src="../js/campus.js"></script>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+
+  /* --- Sesión --- */
+  const al = Alumno.actual();
+  if (!al) { location.href = 'index.html'; }
+
+  const cursoId = new URLSearchParams(location.search).get('c') || (al.cursos[0]);
+  const curso = ACADEMY.cursos[cursoId];
+
+  if (!curso || !al.cursos.includes(cursoId)) {
+    document.body.innerHTML =
+      `<div style="display:grid;place-items:center;min-height:100vh;text-align:center;padding:2rem">
+         <div><h1 class="display t-1">Este curso no está en tu cuenta</h1>
+         <p class="muted">Si lo compraste, escribime y te habilito el acceso.</p>
+         <a class="btn btn--primary mt-2" href="index.html">Volver al campus</a></div>
+       </div>`;
+    throw new Error('curso no habilitado');
+  }
+
+  document.documentElement.dataset.vertical = curso.vertical;
+  document.title = curso.titulo + ' — Aula';
+  $('#navTitulo').innerHTML = `${curso.titulo}<small>Infinit Academy</small>`;
+  $('#listaTitulo').textContent = curso.titulo;
+  $('#listaMeta').textContent = `${curso.modulos.length} módulos`;
+
+  /* --- Índice plano de clases --- */
+  const plano = [];
+  curso.modulos.forEach((m) => {
+    m.clases.forEach((c, i) => {
+      plano.push({ ...c, mod: m.n, modTitulo: m.titulo, key: `m${m.n}c${i}` });
+    });
+  });
+
+  let idx = 0;
+  const guardada = Progreso.de(cursoId).ultima;
+  const encontrada = plano.findIndex((c) => c.key === guardada);
+  if (encontrada >= 0) idx = encontrada;
+
+  /* --- Render --- */
+  const pintarLista = () => {
+    const vistas = new Set(Progreso.de(cursoId).vistas);
+    let html = '';
+    curso.modulos.forEach((m) => {
+      const claves = m.clases.map((_, i) => `m${m.n}c${i}`);
+      const hechas = claves.filter((k) => vistas.has(k)).length;
+      html += `<div class="mod__t"><span>M${String(m.n).padStart(2,'0')} · ${m.titulo}</span><b>${hechas}/${m.clases.length}</b></div>`;
+      m.clases.forEach((c, i) => {
+        const key = `m${m.n}c${i}`;
+        const gi = plano.findIndex((p) => p.key === key);
+        html += `
+          <div class="clase ${vistas.has(key) ? 'is-vista' : ''} ${gi === idx ? 'is-actual' : ''}" data-i="${gi}">
+            <span class="clase__chk">${vistas.has(key) ? '✓' : ''}</span>
+            <span class="clase__t">${c.t}</span>
+            <span class="clase__d">${c.d}</span>
+          </div>`;
+      });
+    });
+    $('#listaBody').innerHTML = html;
+
+    const pct = Progreso.porcentaje(cursoId);
+    $('#barra').style.width = pct + '%';
+    $('#navPct').textContent = pct + '%';
+    $('#listaProg').textContent = `${vistas.size} de ${plano.length} clases · ${pct}%`;
+
+    const actual = document.querySelector('.clase.is-actual');
+    if (actual) actual.scrollIntoView({ block: 'nearest' });
+  };
+
+  const pintarClase = () => {
+    const c = plano[idx];
+    Progreso.ultima(cursoId, c.key);
+
+    $('#claseMod').textContent = `Módulo ${c.mod} · ${c.modTitulo}`;
+    $('#claseTitulo').textContent = c.t;
+    $('#claseDur').textContent = `Duración ${c.d}`;
+
+    const url = urlVideo(c.video);
+    $('#videoBox').innerHTML = url
+      ? `<iframe src="${url}" title="${c.t}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`
+      : `<div class="video-vacio">
+           <div class="ico">🎬</div>
+           <b>Esta clase todavía no tiene el video cargado</b>
+           <p class="muted small mt-1">
+             Para publicarla: subí el video a YouTube como <b>no listado</b> (o a Vimeo) y pegá su ID
+             en <code>js/data.js</code>, en el campo <code>video</code> de esta clase.
+             También podés cargarla desde el <a href="../admin/" style="color:var(--accent)">panel de carga</a>.
+           </p>
+         </div>`;
+
+    const vistas = new Set(Progreso.de(cursoId).vistas);
+    const yaVista = vistas.has(c.key);
+    $('#btnVista').textContent = yaVista ? '✓ Vista — desmarcar' : 'Marcar como vista';
+    $('#btnVista').className = yaVista ? 'btn btn--ghost' : 'btn btn--primary';
+
+    $('#notas').value = localStorage.getItem(`ia_nota_${cursoId}_${c.key}`) || '';
+
+    $('#waClase').href = waLink(
+      `Hola! Soy alumno de ${curso.titulo}. Estoy en la clase "${c.t}" (módulo ${c.mod}) y tengo una consulta:`
+    );
+    $('#waClase').target = '_blank';
+
+    $('#btnPrev').disabled = idx === 0;
+    $('#btnNext').disabled = idx === plano.length - 1;
+
+    pintarRecursos();
+    pintarCert();
+    pintarLista();
+  };
+
+  const pintarRecursos = () => {
+    const c = plano[idx];
+    $('#recursos').innerHTML = `
+      <div class="bonus"><div class="bonus__ico">📄</div><div><b>Apunte del módulo ${c.mod}</b><p>Resumen en PDF de "${c.modTitulo}".</p></div>
+        <a class="bonus__val" href="${waLink('Hola! Quiero el apunte del módulo ' + c.mod + ' de ' + curso.titulo)}" target="_blank">Pedir</a></div>
+      <div class="bonus"><div class="bonus__ico">📋</div><div><b>Ejercicio práctico</b><p>La consigna para practicar esta técnica antes de seguir.</p></div>
+        <a class="bonus__val" href="${waLink('Hola! Quiero la consigna práctica del módulo ' + c.mod)}" target="_blank">Pedir</a></div>
+      <div class="bonus"><div class="bonus__ico">👥</div><div><b>Grupo de alumnos</b><p>Compartí tu práctica y recibí la corrección.</p></div>
+        <a class="bonus__val" href="${waLink('Hola! Quiero entrar al grupo de alumnos.')}" target="_blank">Entrar</a></div>`;
+  };
+
+  const pintarCert = () => {
+    const pct = Progreso.porcentaje(cursoId);
+    $('#certBox').innerHTML =
+      pct === 100
+        ? `<div class="cert"><div class="cert__border">
+             <span class="kicker" style="justify-content:center">Infinit Academy</span>
+             <h2 class="display t-1">Certificado de finalización</h2>
+             <p class="lead center">Otorgado a <b>${al.email.split('@')[0]}</b> por completar<br><b>${curso.titulo}</b> — ${curso.duracion} de cursada.</p>
+             <a class="btn btn--primary mt-2" href="${waLink('Hola! Terminé ' + curso.titulo + ' al 100% y quiero mi certificado a nombre de: ')}" target="_blank">Pedir mi certificado en PDF</a>
+           </div></div>`
+        : `<div class="card center">
+             <div class="card__icon" style="margin-inline:auto">🎓</div>
+             <h3 class="display t-3 mb-1">Te falta poco</h3>
+             <p class="muted small">Completá el 100% de las clases para habilitar tu certificado.</p>
+             <div class="bar" style="max-width:320px;margin:1rem auto .4rem"><i style="width:${pct}%"></i></div>
+             <span class="tiny muted">${pct}% completado</span>
+           </div>`;
+  };
+
+  /* --- Eventos --- */
+  $('#listaBody').addEventListener('click', (e) => {
+    const el = e.target.closest('.clase');
+    if (!el) return;
+    idx = +el.dataset.i;
+    pintarClase();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  $('#btnVista').addEventListener('click', () => {
+    const c = plano[idx];
+    const yaVista = new Set(Progreso.de(cursoId).vistas).has(c.key);
+    Progreso.marcar(cursoId, c.key, !yaVista);
+    if (!yaVista && idx < plano.length - 1) {
+      idx++;
+      pintarClase();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      pintarClase();
+    }
+  });
+
+  $('#btnPrev').addEventListener('click', () => { if (idx > 0) { idx--; pintarClase(); } });
+  $('#btnNext').addEventListener('click', () => { if (idx < plano.length - 1) { idx++; pintarClase(); } });
+
+  let tNota;
+  $('#notas').addEventListener('input', (e) => {
+    clearTimeout(tNota);
+    tNota = setTimeout(() => {
+      localStorage.setItem(`ia_nota_${cursoId}_${plano[idx].key}`, e.target.value);
+      const ok = $('#notaOk');
+      ok.classList.remove('hide');
+      setTimeout(() => ok.classList.add('hide'), 1600);
+    }, 600);
+  });
+
+  $$('.tabs button').forEach((b) => {
+    b.addEventListener('click', () => {
+      $$('.tabs button').forEach((x) => x.classList.remove('on'));
+      $$('.panel').forEach((p) => p.classList.remove('on'));
+      b.classList.add('on');
+      document.querySelector(`[data-panel="${b.dataset.tab}"]`).classList.add('on');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight' && idx < plano.length - 1) { idx++; pintarClase(); }
+    if (e.key === 'ArrowLeft' && idx > 0) { idx--; pintarClase(); }
+  });
+
+  pintarClase();
+})();
+</script>
+</body>
+</html>

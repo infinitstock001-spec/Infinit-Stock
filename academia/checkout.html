@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-vertical="mixto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscripción — Infinit Academy</title>
+<meta name="description" content="Completá tu inscripción a los cursos de Infinit Academy. Mercado Pago, transferencia o efectivo. Hasta 6 cuotas sin interés.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/academia.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>">
+<style>
+  .co { display: grid; grid-template-columns: 1.15fr .85fr; gap: 2.5rem; align-items: start; }
+  @media (max-width: 900px) { .co { grid-template-columns: 1fr; } .co__side { order: -1; } }
+  .co__side { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+  .paybox { border: 1px solid var(--line-strong); border-radius: var(--r); padding: 1.2rem; cursor: pointer; transition: .3s var(--ease); display: flex; gap: 1rem; align-items: flex-start; background: var(--surface); }
+  .paybox:hover { border-color: rgba(var(--accent-rgb), .5); }
+  .paybox.is-sel { border-color: var(--accent); background: rgba(var(--accent-rgb), .07); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), .12); }
+  .paybox input { margin-top: .3rem; accent-color: var(--accent); width: 18px; height: 18px; flex: none; }
+  .paybox b { display: block; margin-bottom: .15rem; }
+  .paybox p { font-size: .85rem; color: var(--tx-mute); margin: 0; }
+  .bump { border: 2px dashed var(--accent); border-radius: var(--r); padding: 1.2rem; background: rgba(var(--accent-rgb), .07); display: flex; gap: 1rem; align-items: flex-start; cursor: pointer; }
+  .bump input { margin-top: .25rem; accent-color: var(--accent); width: 20px; height: 20px; flex: none; }
+  .sum__row { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; font-size: .94rem; }
+  .sum__row.total { border-top: 1px solid var(--line-strong); margin-top: .6rem; padding-top: 1rem; font-size: 1.05rem; }
+  .sum__row.total b { font-family: var(--f-cond); font-size: 2.1rem; line-height: 1; }
+  .datos { background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 1.2rem; font-size: .9rem; }
+  .datos dl { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1rem; margin: 0; }
+  .datos dt { color: var(--tx-mute); }
+  .datos dd { margin: 0; font-weight: 500; word-break: break-all; }
+  .steps { display: flex; gap: .5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+  .steps span { font-size: .78rem; color: var(--tx-mute); display: flex; align-items: center; gap: .5rem; }
+  .steps span::before { content: attr(data-n); width: 22px; height: 22px; border-radius: 50%; background: var(--surface-3); display: grid; place-items: center; font-size: .7rem; }
+  .steps span.on { color: var(--accent); }
+  .steps span.on::before { background: var(--grad-accent); color: #0a0a0f; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="nav is-stuck">
+  <div class="nav__in">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">IA</span>
+      <span>Infinit Academy<small>Barbería &amp; Tatuaje</small></span>
+    </a>
+    <div class="nav__cta">
+      <span class="small muted nowrap">🔒 Compra protegida · 15 días de garantía</span>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="wrap">
+
+    <div class="steps">
+      <span data-n="1" class="on">Elegís el curso</span>
+      <span data-n="2" class="on">Completás tus datos</span>
+      <span data-n="3">Pagás</span>
+      <span data-n="4">Recibís el acceso</span>
+    </div>
+
+    <div class="head center">
+      <span class="kicker" style="justify-content:center">Último paso</span>
+      <h1 class="display t-1">Confirmá tu inscripción</h1>
+    </div>
+
+    <form class="co" id="coForm" novalidate>
+
+      <!-- ===== Columna izquierda: datos y pago ===== -->
+      <div>
+        <h2 class="display t-3 mb-2">1 · Tus datos</h2>
+        <div class="grid g-2" style="gap:0 1rem">
+          <div class="field">
+            <label for="c-nombre">Nombre y apellido *</label>
+            <input id="c-nombre" name="nombre" type="text" required placeholder="Juan Pérez">
+          </div>
+          <div class="field">
+            <label for="c-dni">DNI (para el certificado)</label>
+            <input id="c-dni" name="dni" type="text" inputmode="numeric" placeholder="30.123.456">
+          </div>
+          <div class="field">
+            <label for="c-email">Email *</label>
+            <input id="c-email" name="email" type="email" required placeholder="juan@gmail.com">
+            <span class="hint">Ahí te llega el acceso al campus.</span>
+          </div>
+          <div class="field">
+            <label for="c-tel">WhatsApp *</label>
+            <input id="c-tel" name="tel" type="tel" required placeholder="261 555 1234">
+            <span class="hint">Para el grupo de alumnos y la corrección.</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-ciudad">Ciudad / Provincia</label>
+          <input id="c-ciudad" name="ciudad" type="text" placeholder="Mendoza, Mendoza">
+        </div>
+
+        <!-- Order bump -->
+        <div id="bumpBox" class="mt-2 hide">
+          <label class="bump">
+            <input type="checkbox" id="bump">
+            <div>
+              <b>🔥 Sumá el otro curso completo por solo <span id="bumpPrecio"></span> más</b>
+              <p class="small muted" style="margin:.3rem 0 0">
+                Llevás los dos oficios (barbería + tatuaje) al precio del pack Doble Oficio.
+                Con los dos oficios podés tatuar unos días y cortar los otros, y no depender de una sola fuente de clientes.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <h2 class="display t-3 mt-3 mb-2">2 · Cómo querés pagar</h2>
+        <div class="stack" id="pagos">
+          <label class="paybox is-sel">
+            <input type="radio" name="pago" value="mercadopago" checked>
+            <div>
+              <b>Mercado Pago · Tarjeta de crédito o débito</b>
+              <p>Hasta 6 cuotas sin interés. También Rapipago y Pago Fácil en efectivo. El acceso se habilita apenas se acredita.</p>
+            </div>
+          </label>
+          <label class="paybox">
+            <input type="radio" name="pago" value="transferencia">
+            <div>
+              <b>Transferencia bancaria</b>
+              <p>Te paso el alias, transferís y mandás el comprobante por WhatsApp. Acceso el mismo día.</p>
+            </div>
+          </label>
+          <label class="paybox">
+            <input type="radio" name="pago" value="whatsapp">
+            <div>
+              <b>Coordinar por WhatsApp</b>
+              <p>Si preferís hablar antes de pagar, arreglamos por chat. Contesto yo, no un bot.</p>
+            </div>
+          </label>
+        </div>
+
+        <div id="datosTransfer" class="datos mt-2 hide">
+          <b class="mb-1" style="display:block">Datos para transferir</b>
+          <dl>
+            <dt>Alias</dt><dd id="tAlias"></dd>
+            <dt>CBU</dt><dd id="tCbu"></dd>
+            <dt>Titular</dt><dd id="tTitular"></dd>
+          </dl>
+          <p class="tiny muted mt-1" style="margin-bottom:0">Después de transferir, mandá el comprobante al WhatsApp y te habilito el acceso.</p>
+        </div>
+
+        <p class="tiny muted mt-2">
+          Al confirmar aceptás los <a href="#" data-modal-open="terminosModal" style="color:var(--accent)">términos del curso</a>
+          y la política de garantía de 15 días.
+        </p>
+      </div>
+
+      <!-- ===== Columna derecha: resumen ===== -->
+      <aside class="co__side">
+        <div class="card" style="padding:1.8rem">
+          <span class="tag mb-2" id="sumTag">Tu pedido</span>
+          <h3 class="display t-3 mb-1" id="sumNombre">—</h3>
+          <p class="muted small" id="sumPara"></p>
+
+          <ul class="stack mt-2" style="gap:.5rem" id="sumIncluye"></ul>
+
+          <hr class="divider mt-2 mb-1">
+
+          <div class="sum__row"><span id="sumLabel1">Curso</span><span id="sumP1"></span></div>
+          <div class="sum__row hide" id="sumRowBump"><span>+ Segundo curso</span><span id="sumP2"></span></div>
+          <div class="sum__row" style="color:var(--ok)"><span>Descuento de lanzamiento</span><span id="sumDesc"></span></div>
+          <div class="sum__row total"><span>Total</span><b id="sumTotal"></b></div>
+          <p class="small muted" id="sumCuotas" style="margin-top:.4rem"></p>
+
+          <button class="btn btn--primary btn--block btn--lg mt-2" type="submit" id="coBtn">
+            Confirmar inscripción
+          </button>
+
+          <p class="tiny muted center mt-1" style="margin-bottom:0">
+            🔒 Se abre WhatsApp para confirmar el pago. No se guardan datos de tarjeta en este sitio.
+          </p>
+
+          <hr class="divider mt-2 mb-2">
+          <div class="row" style="gap:.5rem;justify-content:center">
+            <span class="tag tag--ok">15 días de garantía</span>
+            <span class="tag tag--neutral">Acceso de por vida</span>
+          </div>
+        </div>
+
+        <p class="center small muted mt-2">
+          ¿Dudas antes de pagar?
+          <a data-wa="Hola! Estoy por inscribirme y tengo una consulta." style="color:var(--accent);border-bottom:1px solid currentColor">Escribime</a>
+        </p>
+      </aside>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom" style="border:0;padding-top:0">
+      <span>© <span data-year></span> Infinit Academy · Mendoza, Argentina</span>
+      <span><a href="index.html">Volver al inicio</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="terminosModal">
+  <div class="modal__box">
+    <button class="modal__x" data-modal-close aria-label="Cerrar">✕</button>
+    <h3 class="display t-3 mb-2">Términos del curso</h3>
+    <div class="small muted stack" style="gap:.8rem">
+      <p><b style="color:var(--tx)">Acceso.</b> El acceso al campus se habilita dentro de las 12 horas de acreditado el pago, por email y WhatsApp. Es personal e intransferible.</p>
+      <p><b style="color:var(--tx)">Garantía.</b> Tenés 15 días corridos desde la compra para pedir la devolución del 100% escribiendo al WhatsApp de la academia. No se piden explicaciones.</p>
+      <p><b style="color:var(--tx)">Contenido.</b> Los videos y materiales son propiedad de Infinit Academy. No está permitido revenderlos, compartirlos ni publicarlos.</p>
+      <p><b style="color:var(--tx)">Certificado.</b> Es un certificado de finalización emitido por la academia. No constituye un título oficial habilitante del Ministerio de Educación.</p>
+      <p><b style="color:var(--tx)">Responsabilidad.</b> La práctica del tatuaje y la barbería implica riesgos sanitarios. El curso enseña los protocolos de bioseguridad, pero la aplicación correcta y el cumplimiento de la normativa local son responsabilidad de cada alumno.</p>
+    </div>
+    <button class="btn btn--primary btn--block mt-2" data-modal-close>Entendido</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

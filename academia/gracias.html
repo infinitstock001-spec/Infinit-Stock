@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-vertical="mixto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Listo! Tu inscripción está en camino — Infinit Academy</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/academia.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎉</text></svg>">
+<style>
+  .check { width: 96px; height: 96px; margin: 0 auto 1.5rem; border-radius: 50%; display: grid; place-items: center; background: rgba(61,220,151,.12); border: 2px solid rgba(61,220,151,.45); color: var(--ok); font-size: 2.6rem; animation: pop .6s cubic-bezier(.22,1,.36,1); }
+  @keyframes pop { from { transform: scale(.5); opacity: 0 } to { transform: none; opacity: 1 } }
+  .paso { display: flex; gap: 1.1rem; align-items: flex-start; padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+  .paso:last-child { border-bottom: 0; }
+  .paso__n { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-accent); color: #0a0a0f; display: grid; place-items: center; font-family: var(--f-cond); flex: none; }
+</style>
+</head>
+<body>
+
+<header class="nav is-stuck">
+  <div class="nav__in">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">IA</span>
+      <span>Infinit Academy<small>Barbería &amp; Tatuaje</small></span>
+    </a>
+    <a class="btn btn--sm btn--ghost" href="campus/">Ir al campus</a>
+  </div>
+</header>
+
+<section class="grain" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <div class="aurora"><span></span><span></span><span></span></div>
+  <div class="wrap-sm rel center">
+    <div class="check">✓</div>
+    <span class="kicker" style="justify-content:center">Recibido</span>
+    <h1 class="display t-1 mb-2">Ya tenés tu lugar reservado</h1>
+    <p class="lead center" id="resumen">
+      Te abrí el WhatsApp con el detalle de tu inscripción. Mandámelo y te confirmo el acceso.
+    </p>
+    <p class="small muted mt-1" id="ordenId"></p>
+
+    <div class="row row-c mt-3">
+      <a class="btn btn--wa btn--lg" id="waBtn">Mandar el mensaje por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec-tight">
+  <div class="wrap-sm">
+    <div class="card">
+      <h2 class="display t-3 mb-2">Qué pasa ahora</h2>
+      <div class="paso"><div class="paso__n">1</div><div><b>Confirmás el pago</b><p class="muted small" style="margin:0">Por Mercado Pago, transferencia o como hayamos arreglado por chat.</p></div></div>
+      <div class="paso"><div class="paso__n">2</div><div><b>Te llega el acceso</b><p class="muted small" style="margin:0">Dentro de las 12 horas, por mail y por WhatsApp, con tu usuario del campus.</p></div></div>
+      <div class="paso"><div class="paso__n">3</div><div><b>Entrás al grupo de alumnos</b><p class="muted small" style="margin:0">Ahí se comparten trabajos y te corrijo lo que vayas practicando.</p></div></div>
+      <div class="paso"><div class="paso__n">4</div><div><b>Empezás por el módulo 1</b><p class="muted small" style="margin:0">Con la lista de qué comprar antes de gastar un peso de más.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- UPSELL -->
+<section class="bg-soft" id="upsell">
+  <div class="wrap-sm">
+    <div class="cta-final">
+      <span class="tag tag--hot mb-2">Solo para alumnos que acaban de inscribirse</span>
+      <h2 class="display t-1 mb-2">Sumá la Mentoría Élite</h2>
+      <p class="lead center mb-3">
+        4 sesiones 1 a 1 por videollamada, auditoría de tu Instagram y de tus precios,
+        y un plan de captación de clientes a 90 días. Solo <span data-cupos>8</span> cupos por mes.
+      </p>
+      <div class="row row-c">
+        <a class="btn btn--primary btn--lg" href="checkout.html?plan=mentoria">Ver la mentoría</a>
+        <a class="btn btn--ghost btn--lg" href="campus/">Prefiero arrancar solo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom" style="border:0;padding-top:0">
+      <span>© <span data-year></span> Infinit Academy · Mendoza, Argentina</span>
+      <span><a href="index.html">Inicio</a> · <a href="campus/">Campus</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+(() => {
+  const orden = JSON.parse(localStorage.getItem('ia_ultima_orden') || 'null');
+  const idParam = new URLSearchParams(location.search).get('orden');
+  if (idParam) document.getElementById('ordenId').textContent = 'Número de inscripción: ' + idParam;
+
+  if (orden) {
+    document.getElementById('resumen').innerHTML =
+      `<b>${orden.cliente.nombre}</b>, reservaste <b>${orden.productoNombre}</b> por <b>${fmtARS(orden.total)}</b>. ` +
+      `Te abrí el WhatsApp con el detalle. Mandámelo y te confirmo el acceso.`;
+
+    document.getElementById('waBtn').href = waLink(
+      `Hola! Soy ${orden.cliente.nombre}. Confirmo mi inscripción ${orden.id} a ${orden.productoNombre} por ${fmtARS(orden.total)}.`
+    );
+  } else {
+    document.getElementById('waBtn').href = waLink('Hola! Quiero confirmar mi inscripción a los cursos.');
+  }
+  document.getElementById('waBtn').target = '_blank';
+  document.getElementById('waBtn').rel = 'noopener';
+})();
+</script>
+</body>
+</html>

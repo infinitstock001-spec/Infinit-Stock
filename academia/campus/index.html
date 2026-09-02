@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-vertical="mixto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus de alumnos — Infinit Academy</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/academia.css">
+<link rel="stylesheet" href="../css/campus.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+</head>
+<body>
+
+<header class="nav is-stuck">
+  <div class="nav__in">
+    <a class="logo" href="../index.html">
+      <span class="logo__mark">IA</span>
+      <span>Infinit Academy<small>Campus de alumnos</small></span>
+    </a>
+    <div class="nav__cta" id="navCta"></div>
+  </div>
+</header>
+
+<!-- ===== ACCESO ===== -->
+<section class="campus" id="vistaLogin">
+  <div class="login">
+    <div class="center mb-3">
+      <div class="logo__mark" style="width:56px;height:56px;font-size:1.6rem;margin:0 auto 1rem">IA</div>
+      <h1 class="display t-2">Entrá al campus</h1>
+      <p class="muted small">Usá el código de alumno que te mandé por WhatsApp cuando confirmaste el pago.</p>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="l-email">Tu email</label>
+        <input id="l-email" name="email" type="email" required placeholder="tu@mail.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="l-cod">Código de alumno</label>
+        <input id="l-cod" name="codigo" type="text" required placeholder="IA-XXXX-0000" style="text-transform:uppercase">
+      </div>
+      <p class="tag tag--hot hide mb-1" id="loginError" style="width:100%;justify-content:center;padding:.7rem"></p>
+      <button class="btn btn--primary btn--block btn--lg" type="submit">Entrar</button>
+    </form>
+
+    <hr class="divider mt-3 mb-2">
+
+    <p class="tiny muted center">
+      ¿Todavía no sos alumno? <a href="../index.html#precios" style="color:var(--accent)">Mirá los cursos</a><br>
+      ¿Perdiste el código? <a data-wa="Hola! Perdí mi código de alumno del campus." style="color:var(--accent)">Pedímelo por WhatsApp</a>
+    </p>
+
+    <div class="datos mt-2" style="font-size:.8rem">
+      <b style="color:var(--tx)">Para probar el campus:</b>
+      <p class="muted" style="margin:.4rem 0 0">
+        Ingresá cualquier email y el código <b style="color:var(--accent)">IA-DEMO</b> para recorrer la plataforma
+        con los dos cursos habilitados.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PANEL ===== -->
+<section class="campus hide" id="vistaPanel">
+  <div class="wrap">
+    <div class="head">
+      <span class="kicker">Tu campus</span>
+      <h1 class="display t-1" id="saludo">Hola</h1>
+      <p class="lead">Retomá donde quedaste. Tu progreso se guarda solo.</p>
+    </div>
+
+    <div class="stack" id="misCursos" style="gap:1.2rem"></div>
+
+    <div class="grid g-3 mt-3">
+      <article class="card">
+        <div class="card__icon">💬</div>
+        <h3>Grupo de alumnos</h3>
+        <p>Mandá fotos o videos de lo que practicás y te lo corrijo. Es la parte que más rinde del curso.</p>
+        <a class="btn btn--sm btn--ghost mt-2" data-wa="Hola! Soy alumno y quiero entrar al grupo de WhatsApp.">Sumarme al grupo</a>
+      </article>
+      <article class="card">
+        <div class="card__icon">📥</div>
+        <h3>Material descargable</h3>
+        <p>Plantillas de precios, fichas de cliente, checklists de bioseguridad y diseños flash.</p>
+        <a class="btn btn--sm btn--ghost mt-2" data-wa="Hola! Quiero el material descargable del curso.">Pedir el material</a>
+      </article>
+      <article class="card">
+        <div class="card__icon">🎓</div>
+        <h3>Tu certificado</h3>
+        <p>Se habilita cuando completás el 100% de los módulos de un curso. Lo ves dentro del aula.</p>
+        <span class="tag tag--neutral mt-2" id="certEstado">Sin cursos completados</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script src="../js/data.js"></script>
+<script src="../js/campus.js"></script>
+<script src="../js/app.js"></script>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const login = $('#vistaLogin');
+  const panel = $('#vistaPanel');
+
+  const pintarPanel = (al) => {
+    login.classList.add('hide');
+    panel.classList.remove('hide');
+    $('#saludo').textContent = 'Hola, ' + (al.email.split('@')[0] || 'alumno');
+
+    $('#navCta').innerHTML =
+      `<span class="small muted nowrap">${al.email}</span>
+       <button class="btn btn--sm btn--ghost" id="salir">Salir</button>`;
+    $('#salir').onclick = () => Alumno.salir();
+
+    let completos = 0;
+    $('#misCursos').innerHTML = al.cursos
+      .map((id) => {
+        const c = ACADEMY.cursos[id];
+        const pct = Progreso.porcentaje(id);
+        if (pct === 100) completos++;
+        const vistas = Progreso.de(id).vistas.length;
+        return `
+        <article class="curso-card" data-vertical="${c.vertical}">
+          <div class="curso-card__ico">${c.icono}</div>
+          <div>
+            <h3 class="display t-3">${c.titulo}</h3>
+            <p class="muted small" style="margin:.2rem 0 0">${c.subtitulo}</p>
+            <div class="bar"><i style="width:${pct}%"></i></div>
+            <div class="row" style="justify-content:space-between;gap:.5rem">
+              <span class="tiny muted">${vistas} de ${totalClases(c)} clases · ${c.duracion}</span>
+              <span class="tiny" style="color:var(--accent)">${pct}% completado</span>
+            </div>
+          </div>
+          <a class="btn btn--primary" href="curso.html?c=${id}">${pct > 0 ? 'Continuar' : 'Empezar'} →</a>
+        </article>`;
+      })
+      .join('');
+
+    if (completos) {
+      $('#certEstado').textContent = `${completos} curso${completos > 1 ? 's' : ''} completado${completos > 1 ? 's' : ''}`;
+      $('#certEstado').className = 'tag tag--ok mt-2';
+    }
+  };
+
+  const yaEsta = Alumno.actual();
+  if (yaEsta && yaEsta.cursos && yaEsta.cursos.length) pintarPanel(yaEsta);
+
+  $('#loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = $('#l-email').value.trim();
+    const codigo = $('#l-cod').value.trim();
+    const err = $('#loginError');
+
+    if (!email || !codigo) {
+      err.textContent = 'Completá el email y el código.';
+      err.classList.remove('hide');
+      return;
+    }
+
+    const cursos = Alumno.cursosDe(codigo);
+    if (!cursos) {
+      err.textContent = 'Ese código no es válido. Revisalo o escribime por WhatsApp.';
+      err.classList.remove('hide');
+      return;
+    }
+
+    err.classList.add('hide');
+    const datos = { email, codigo: codigo.toUpperCase(), cursos };
+    Alumno.entrar(datos);
+    pintarPanel(datos);
+  });
+})();
+</script>
+</body>
+</html>

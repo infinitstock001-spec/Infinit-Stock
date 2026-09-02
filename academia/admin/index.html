@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-vertical="mixto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de carga — Infinit Academy</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#07070a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/academia.css">
+<link rel="stylesheet" href="../css/campus.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<style>
+  .fila { display: grid; grid-template-columns: 1fr 240px 90px; gap: .8rem; align-items: center; padding: .7rem 0; border-bottom: 1px solid var(--line); }
+  @media (max-width: 760px) { .fila { grid-template-columns: 1fr; gap: .4rem; } }
+  .fila input { padding: .6rem .8rem; font-size: .85rem; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 8px; width: 100%; }
+  .fila input.ok { border-color: var(--ok); }
+  .fila .est { font-size: .75rem; text-align: right; color: var(--tx-mute); }
+  .fila .est.ok { color: var(--ok); }
+  pre { background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 1.2rem; overflow: auto; font-size: .78rem; max-height: 340px; line-height: 1.55; }
+  .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  .kpi > div { background: var(--bg-2); padding: 1.2rem; text-align: center; }
+  .kpi b { font-family: var(--f-cond); font-size: 2rem; display: block; color: var(--accent); }
+  .kpi span { font-size: .74rem; color: var(--tx-mute); text-transform: uppercase; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+
+<header class="nav is-stuck">
+  <div class="nav__in">
+    <a class="logo" href="../index.html">
+      <span class="logo__mark">IA</span>
+      <span>Panel de carga<small>Uso interno</small></span>
+    </a>
+    <a class="btn btn--sm btn--ghost" href="../campus/">Ver el campus</a>
+  </div>
+</header>
+
+<section class="campus">
+  <div class="wrap">
+
+    <div class="head">
+      <span class="kicker">Uso interno</span>
+      <h1 class="display t-1">Cargá tus videos</h1>
+      <p class="lead">
+        Subí cada clase a YouTube como <b>"no listado"</b> (o a Vimeo), copiá el ID y pegalo acá.
+        Se guarda en este navegador para que puedas probar al toque. Cuando esté todo cargado,
+        exportás abajo y pegás el resultado en <code>js/data.js</code> para que quede publicado para todos.
+      </p>
+    </div>
+
+    <div class="card mb-3" style="border-color:rgba(255,179,71,.4)">
+      <b>⚠️ Esta página no tiene contraseña.</b>
+      <p class="muted small" style="margin:.4rem 0 0">
+        No guarda datos sensibles ni permite cobrar, pero conviene no compartir el link.
+        Si querés protegerla de verdad, en Netlify se hace con
+        <a href="https://docs.netlify.com/security/secure-access-to-sites/password-protection/" target="_blank" rel="noopener" style="color:var(--accent)">password protection</a>
+        o con una regla en <code>_headers</code>.
+      </p>
+    </div>
+
+    <div class="kpi mb-3" id="kpis"></div>
+
+    <div class="tabs">
+      <button class="on" data-t="barberia">Barbería (51 clases)</button>
+      <button data-t="tatuaje">Tatuaje (63 clases)</button>
+      <button data-t="export">Exportar</button>
+      <button data-t="datos">Ventas y consultas</button>
+    </div>
+
+    <div class="panel on" data-p="barberia"><div id="listaBarberia"></div></div>
+    <div class="panel" data-p="tatuaje"><div id="listaTatuaje"></div></div>
+
+    <div class="panel" data-p="export">
+      <div class="card">
+        <h2 class="display t-3 mb-1">Exportar los videos cargados</h2>
+        <p class="muted small">
+          Copiá este bloque y pegalo al final de <code>js/data.js</code>, reemplazando el bloque anterior si ya existe.
+          Así los videos quedan publicados para todos los alumnos, no solo en tu navegador.
+        </p>
+        <pre id="salida">—</pre>
+        <div class="row mt-2">
+          <button class="btn btn--primary" id="btnCopiar">Copiar al portapapeles</button>
+          <button class="btn btn--ghost" id="btnDescargar">Descargar como .js</button>
+          <button class="btn btn--ghost" id="btnLimpiar" style="border-color:rgba(255,77,94,.4);color:var(--danger)">Borrar todo lo cargado</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" data-p="datos">
+      <div class="grid g-2">
+        <div class="card">
+          <h3 class="display t-3 mb-1">Inscripciones registradas</h3>
+          <p class="muted small">Pedidos generados desde el checkout en este navegador.</p>
+          <pre id="ordenes">—</pre>
+        </div>
+        <div class="card">
+          <h3 class="display t-3 mb-1">Consultas / clase gratis</h3>
+          <p class="muted small">Leads capturados en los formularios de la web.</p>
+          <pre id="leads">—</pre>
+        </div>
+      </div>
+      <p class="muted small mt-2">
+        Estos datos viven en el navegador de cada visitante, así que solo ves los tuyos.
+        Para juntar los leads de verdad conviene conectar
+        <a href="https://docs.netlify.com/manage/forms/setup/" target="_blank" rel="noopener" style="color:var(--accent)">Netlify Forms</a>
+        (agregando <code>netlify</code> al atributo del formulario) o un Google Sheet.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script src="../js/data.js"></script>
+<script src="../js/campus.js"></script>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const leer = () => { try { return JSON.parse(localStorage.getItem('ia_videos') || '{}'); } catch { return {}; } };
+  let videos = leer();
+
+  const pintarLista = (cursoId, cont) => {
+    const curso = ACADEMY.cursos[cursoId];
+    let html = '';
+    curso.modulos.forEach((m) => {
+      html += `<h3 class="display t-3 mt-3 mb-1">M${String(m.n).padStart(2,'0')} · ${m.titulo}</h3>`;
+      m.clases.forEach((c, i) => {
+        const clave = `${cursoId}.${m.n}.${i}`;
+        const val = videos[clave] || '';
+        html += `
+          <div class="fila">
+            <span class="small">${c.t} <span class="muted tiny">· ${c.d}</span></span>
+            <input type="text" data-k="${clave}" value="${val}" placeholder="ID de YouTube o vimeo:123456" class="${val ? 'ok' : ''}">
+            <span class="est ${val ? 'ok' : ''}">${val ? '✓ cargado' : 'pendiente'}</span>
+          </div>`;
+      });
+    });
+    $(cont).innerHTML = html;
+  };
+
+  const kpis = () => {
+    const total = totalClases(ACADEMY.cursos.barberia) + totalClases(ACADEMY.cursos.tatuaje);
+    const cargados = Object.values(videos).filter(Boolean).length;
+    $('#kpis').innerHTML = `
+      <div><b>${cargados}</b><span>Videos cargados</span></div>
+      <div><b>${total - cargados}</b><span>Pendientes</span></div>
+      <div><b>${Math.round((cargados / total) * 100)}%</b><span>Completado</span></div>
+      <div><b>${total}</b><span>Clases totales</span></div>`;
+  };
+
+  const exportar = () => {
+    const limpio = Object.fromEntries(Object.entries(videos).filter(([, v]) => v));
+    $('#salida').textContent = Object.keys(limpio).length
+      ? `/* Videos cargados el ${new Date().toLocaleDateString('es-AR')} */\n` +
+        `Object.entries(${JSON.stringify(limpio, null, 2)}).forEach(([k, v]) => {\n` +
+        `  const [cid, m, c] = k.split('.');\n` +
+        `  const mod = ACADEMY.cursos[cid]?.modulos.find(x => x.n === +m);\n` +
+        `  if (mod && mod.clases[+c]) mod.clases[+c].video = v;\n});`
+      : 'Todavía no cargaste ningún video.';
+  };
+
+  document.addEventListener('input', (e) => {
+    const inp = e.target.closest('input[data-k]');
+    if (!inp) return;
+    const v = inp.value.trim();
+    if (v) videos[inp.dataset.k] = v; else delete videos[inp.dataset.k];
+    localStorage.setItem('ia_videos', JSON.stringify(videos));
+    inp.classList.toggle('ok', !!v);
+    inp.closest('.fila').querySelector('.est').textContent = v ? '✓ cargado' : 'pendiente';
+    inp.closest('.fila').querySelector('.est').classList.toggle('ok', !!v);
+    kpis(); exportar();
+  });
+
+  $$('.tabs button').forEach((b) => {
+    b.addEventListener('click', () => {
+      $$('.tabs button').forEach((x) => x.classList.remove('on'));
+      $$('.panel').forEach((p) => p.classList.remove('on'));
+      b.classList.add('on');
+      $(`[data-p="${b.dataset.t}"]`).classList.add('on');
+    });
+  });
+
+  $('#btnCopiar').addEventListener('click', async () => {
+    await navigator.clipboard.writeText($('#salida').textContent);
+    $('#btnCopiar').textContent = '✓ Copiado';
+    setTimeout(() => ($('#btnCopiar').textContent = 'Copiar al portapapeles'), 1800);
+  });
+
+  $('#btnDescargar').addEventListener('click', () => {
+    const blob = new Blob([$('#salida').textContent], { type: 'text/javascript' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'videos-infinit-academy.js';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  $('#btnLimpiar').addEventListener('click', () => {
+    if (!confirm('¿Borrar todos los IDs de video cargados en este navegador?')) return;
+    videos = {};
+    localStorage.removeItem('ia_videos');
+    pintarLista('barberia', '#listaBarberia');
+    pintarLista('tatuaje', '#listaTatuaje');
+    kpis(); exportar();
+  });
+
+  const dump = (key, sel, vacio) => {
+    const d = JSON.parse(localStorage.getItem(key) || '[]');
+    $(sel).textContent = d.length ? JSON.stringify(d, null, 2) : vacio;
+  };
+
+  pintarLista('barberia', '#listaBarberia');
+  pintarLista('tatuaje', '#listaTatuaje');
+  kpis();
+  exportar();
+  dump('ia_ordenes', '#ordenes', 'Todavía no hay inscripciones registradas en este navegador.');
+  dump('ia_leads', '#leads', 'Todavía no hay consultas registradas en este navegador.');
+})();
+</script>
+</body>
+</html>

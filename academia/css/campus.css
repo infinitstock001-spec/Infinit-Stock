@@ -1,0 +1,208 @@
+/* ============================================================
+   INFINIT ACADEMY — Campus de alumnos
+   ============================================================ */
+
+.campus { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 4rem; }
+
+/* --- Acceso --- */
+.login {
+  width: min(100% - 2.5rem, 460px);
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  padding: 2.4rem;
+  box-shadow: var(--shadow);
+}
+
+/* --- Panel del alumno --- */
+.curso-card {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 1.4rem;
+  align-items: center;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .012));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  transition: transform .4s var(--ease), border-color .3s;
+}
+
+.curso-card:hover { transform: translateY(-4px); border-color: rgba(var(--accent-rgb), .45); }
+
+.curso-card__ico {
+  width: 96px; height: 96px;
+  border-radius: var(--r);
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  background: var(--grad-accent);
+  color: #0a0a0f;
+}
+
+@media (max-width: 700px) {
+  .curso-card { grid-template-columns: 1fr; text-align: left; }
+  .curso-card__ico { width: 64px; height: 64px; font-size: 1.7rem; }
+}
+
+.bar {
+  height: 7px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+  margin: .6rem 0 .4rem;
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--grad-accent);
+  transition: width .8s var(--ease);
+}
+
+/* --- Aula --- */
+.aula {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1080px) {
+  .aula { grid-template-columns: 1fr; }
+}
+
+.video-box {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(var(--accent-rgb), .22), transparent 60%),
+    #0a0a10;
+  display: grid;
+  place-items: center;
+}
+
+.video-box iframe { width: 100%; height: 100%; border: 0; }
+
+.video-vacio {
+  text-align: center;
+  padding: 2rem;
+  max-width: 44ch;
+}
+
+.video-vacio .ico {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid var(--line-strong);
+  font-size: 1.6rem;
+}
+
+/* Lista de módulos */
+.lista {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  max-height: 78vh;
+  overflow-y: auto;
+}
+
+.lista__head {
+  padding: 1.2rem 1.3rem;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 2;
+}
+
+.mod__t {
+  padding: .95rem 1.3rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--f-cond);
+  letter-spacing: .1em;
+  font-size: .92rem;
+  color: var(--tx-soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.mod__t b { color: var(--accent); }
+
+.clase {
+  display: flex;
+  gap: .85rem;
+  align-items: flex-start;
+  padding: .85rem 1.3rem;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .25s, padding-left .25s;
+  font-size: .9rem;
+}
+
+.clase:hover { background: rgba(255, 255, 255, .035); padding-left: 1.6rem; }
+.clase.is-actual { background: rgba(var(--accent-rgb), .1); border-left: 2px solid var(--accent); }
+.clase.is-vista .clase__t { color: var(--tx-mute); text-decoration: line-through; text-decoration-color: rgba(255,255,255,.25); }
+
+.clase__chk {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-size: .7rem;
+  margin-top: .15rem;
+  transition: .25s;
+}
+
+.clase.is-vista .clase__chk { background: var(--ok); border-color: var(--ok); color: #06180f; }
+.clase__t { flex: 1; line-height: 1.4; }
+.clase__d { font-size: .76rem; color: var(--tx-mute); white-space: nowrap; }
+
+/* Notas y recursos */
+.tabs { display: flex; gap: .4rem; border-bottom: 1px solid var(--line); margin-bottom: 1.4rem; flex-wrap: wrap; }
+
+.tabs button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: .8rem 1.1rem;
+  cursor: pointer;
+  color: var(--tx-mute);
+  font-size: .92rem;
+  transition: .25s;
+}
+
+.tabs button.on { color: var(--accent); border-bottom-color: var(--accent); }
+
+.panel { display: none; }
+.panel.on { display: block; animation: fadeIn .3s; }
+
+/* Certificado */
+.cert {
+  border: 2px solid var(--accent);
+  border-radius: var(--r-lg);
+  padding: 2.5rem;
+  text-align: center;
+  background:
+    radial-gradient(120% 130% at 50% 0%, rgba(var(--accent-rgb), .16), transparent 60%),
+    var(--surface);
+}
+
+.cert__border {
+  border: 1px dashed rgba(var(--accent-rgb), .5);
+  border-radius: var(--r);
+  padding: 2rem 1.5rem;
+}
