@@ -3,6 +3,8 @@
 Plataforma de venta de cursos online de barbería y tatuaje. HTML, CSS y JavaScript puro:
 no necesita compilar nada, se sube tal cual a Netlify y funciona.
 
+**Para empezar a cobrar, leé [EMPEZAR-HOY.md](EMPEZAR-HOY.md).** Son 5 pasos en un solo archivo.
+
 La estrategia comercial (precios, competencia, embudo, plan de contenido) está en
 **[ESTRATEGIA.md](ESTRATEGIA.md)**. Este archivo es solo la parte técnica.
 
@@ -15,18 +17,28 @@ La estrategia comercial (precios, competencia, embudo, plan de contenido) está 
 | `index.html` | Landing del embudo: promesa, dolor, método, precios, testimonios, garantía, captura de leads y FAQ |
 | `cursos/barberia.html` | Página de venta del curso de barbería (tema dorado) |
 | `cursos/tatuaje.html` | Página de venta del curso de tatuaje (tema violeta) |
-| `checkout.html` | Inscripción: datos, order bump, medios de pago |
+| `clase-gratis.html` | Imán de contactos: clase gratis a cambio del WhatsApp |
+| `checkout.html` | Inscripción: datos, order bump, cupones, medios de pago |
 | `gracias.html` | Post-compra con los próximos pasos y el upsell a la mentoría |
 | `campus/index.html` | Acceso de alumnos y panel con sus cursos |
 | `campus/curso.html` | Aula: video, lista de clases, progreso, notas y certificado |
-| `admin/index.html` | Panel interno para cargar los IDs de video |
+| `admin/index.html` | Panel interno: carga de videos, embudo y pedidos |
+| `forms.html` | Página oculta que le declara los formularios a Netlify. No se toca |
 
 ---
 
-## El archivo que vas a tocar: `js/data.js`
+## Los dos archivos que vas a tocar
 
-**Todo el contenido del sitio sale de ahí.** Precios, cursos, temario, testimonios, FAQ,
-datos de cobro y WhatsApp. Si cambiás un precio ahí, cambia en las cinco páginas a la vez.
+### `js/config.js` — lo comercial
+
+Cobro, WhatsApp, preventa, píxel de Meta, cupones y la clave del panel.
+**Es el único que hace falta editar para empezar a vender.** Está todo numerado y explicado
+adentro. Lo que pongas acá le gana a lo que diga `data.js`.
+
+### `js/data.js` — el contenido
+
+Precios, cursos, temario, testimonios, FAQ y bonus. Si cambiás un precio ahí, cambia en
+todas las páginas a la vez.
 
 ```js
 barberia: {
@@ -81,24 +93,41 @@ La lógica está en `js/campus.js` → `Alumno.cursosDe()`.
 
 ## Cobrar de verdad
 
-En `js/data.js`, sección `pagos`:
+Todo se configura en `js/config.js`. El paso a paso está en
+**[EMPEZAR-HOY.md](EMPEZAR-HOY.md)**.
 
-```js
-mercadopago: {
-  activo: true,                        // ponelo en true
-  links: { barberia: 'https://…' },    // un link de pago por producto
-},
-transferencia: {
-  alias: 'TU.ALIAS.REAL',
-  cbu: '…',
-  titular: '…',
-},
-```
+En resumen: mientras Mercado Pago esté en `activo: false` y no haya alias cargado, el
+checkout arma un mensaje con el pedido completo y lo manda a tu WhatsApp. Sirve perfecto
+para las primeras ventas.
 
-Los links se crean en Mercado Pago → **Cobros → Link de pago**.
+**Los medios de pago que se le muestran al cliente son solo los que están configurados.**
+Si no cargaste el alias, no aparece la opción de transferencia. Es a propósito.
 
-Mientras `activo` esté en `false`, el checkout arma un mensaje con el pedido completo y lo
-manda a tu WhatsApp. Sirve perfecto para arrancar.
+---
+
+## A dónde te llegan los contactos
+
+Los formularios hacen dos cosas a la vez:
+
+1. **Abren WhatsApp** con el mensaje escrito. Ese es el canal rápido.
+2. **Mandan una copia a Netlify Forms**, así el contacto te queda guardado aunque la
+   persona no llegue a mandar el mensaje.
+
+Los ves en **app.netlify.com → tu sitio → Forms**. Para que te lleguen por mail:
+Forms → Settings → Form notifications.
+
+Los tres formularios (`inscripcion`, `clase-gratis`, `consulta`) están declarados en
+`forms.html`. Ese archivo no se toca ni se borra: sin él Netlify no los reconoce.
+
+---
+
+## Medir qué funciona
+
+`js/track.js` registra cada paso del embudo: quién vio los precios, quién tocó "lo quiero",
+quién abrió el checkout, quién confirmó. Lo ves en `/admin/` → pestaña **Ventas y consultas**.
+
+Si cargás el `metaPixel` en `config.js`, los mismos eventos van a Meta y podés hacer
+publicidad en Instagram optimizada por conversión. Sin píxel cargado, no manda nada afuera.
 
 ---
 
@@ -110,9 +139,9 @@ Esto es un sitio estático, así que:
   Para bloquear eso de verdad hace falta un backend con login.
 - **El progreso y las notas viven en el navegador del alumno.** Si cambia de dispositivo o borra
   los datos del sitio, arranca de cero.
-- **Los leads también quedan en el navegador de cada visitante**, por eso los formularios
-  abren WhatsApp: ese es el canal que sí te llega. Para juntarlos automáticamente, conectá
-  [Netlify Forms](https://docs.netlify.com/manage/forms/setup/).
+- **La traba de `/admin/` es simple**, no criptográfica: alguien que sepa mirar el código
+  encuentra la clave. Como el panel no cobra ni guarda datos de tarjeta, el riesgo es bajo.
+  Para protección real, Netlify → Access control → Password protection.
 
 Para las primeras decenas de alumnos esto alcanza y sobra. Cuando el volumen lo justifique,
 el paso siguiente es un backend (Supabase o Firebase) reemplazando `Alumno` y `Progreso`

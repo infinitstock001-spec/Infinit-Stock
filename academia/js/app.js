@@ -291,12 +291,24 @@
     localStorage.setItem('ia_leads', JSON.stringify(leads));
   };
 
-  /* ---------- Formularios de captura → WhatsApp ---------- */
+  /* ---------- Formularios de captura → WhatsApp + Netlify ---------- */
   $$('form[data-lead]').forEach((form) => {
     on(form, 'submit', (e) => {
       e.preventDefault();
       const fd = Object.fromEntries(new FormData(form));
       guardarLead(fd);
+      if (window.track) track('lead', { producto: fd.interes || '', origen: form.dataset.lead });
+
+      // Copia al panel de Netlify: el contacto te queda guardado aunque
+      // la persona no llegue a mandar el mensaje de WhatsApp.
+      if (form.getAttribute('data-netlify')) {
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd).toString(),
+        }).catch(() => {});
+      }
+
       const tipo = form.dataset.lead;
       const msg =
         tipo === 'clase-gratis'
@@ -348,6 +360,83 @@
 
   /* ---------- Año en el footer ---------- */
   $$('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  /* ---------- Datos estructurados para Google ----------
+     Le dice a Google que esto es un curso, cuánto sale y en qué
+     moneda, para que pueda mostrarlo como resultado enriquecido. */
+  const jsonLD = (obj) => {
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(obj);
+    document.head.appendChild(s);
+  };
+
+  const SITIO = 'https://infinitstock.netlify.app/academia';
+
+  const organizacion = {
+    '@type': 'EducationalOrganization',
+    '@id': SITIO + '/#organizacion',
+    name: ACADEMY.marca.nombre,
+    url: SITIO + '/',
+    email: ACADEMY.marca.email,
+    address: { '@type': 'PostalAddress', addressLocality: 'Mendoza', addressCountry: 'AR' },
+    sameAs: ['https://instagram.com/' + ACADEMY.marca.instagram],
+  };
+
+  const cursoActual = tmBox ? ACADEMY.cursos[tmBox.dataset.temario] : null;
+
+  if (cursoActual) {
+    const prod = ACADEMY.productos[cursoActual.id];
+    jsonLD({
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: cursoActual.titulo,
+      description: cursoActual.promesa,
+      inLanguage: 'es-AR',
+      provider: organizacion,
+      offers: {
+        '@type': 'Offer',
+        price: prod.precio,
+        priceCurrency: 'ARS',
+        availability: 'https://schema.org/InStock',
+        url: `${SITIO}/checkout.html?plan=${cursoActual.id}`,
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT' + parseInt(cursoActual.duracion, 10) + 'H',
+      },
+      numberOfCredits: totalClases(cursoActual),
+    });
+  } else if (document.querySelector('[data-planes]')) {
+    jsonLD({ '@context': 'https://schema.org', ...organizacion });
+  }
+
+  if (fBox && ACADEMY.faq.length) {
+    jsonLD({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: ACADEMY.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    });
+  }
+
+  /* ---------- Aviso de preventa en las páginas de venta ---------- */
+  const pv = ACADEMY.config.preventa;
+  $$('[data-preventa]').forEach((el) => {
+    if (!pv || !pv.activo) { el.remove(); return; }
+    el.innerHTML = `
+      <b>📅 Acceso de fundador — el curso se está publicando</b>
+      <p class="small muted" style="margin:.5rem 0 0">
+        Hoy recibís <b>${pv.entregaHoy.toLowerCase()}</b>, y después sube ${pv.ritmo.toLowerCase()}
+        hasta quedar completo en ${pv.completo.toLowerCase()}. Comprando ahora te llevás
+        ${pv.beneficio.toLowerCase()}.
+      </p>`;
+    el.classList.remove('hide');
+  });
 
   /* ---------- Precios inyectados en el HTML ---------- */
   $$('[data-precio]').forEach((el) => {

@@ -37,7 +37,26 @@
   .steps span::before { content: attr(data-n); width: 22px; height: 22px; border-radius: 50%; background: var(--surface-3); display: grid; place-items: center; font-size: .7rem; }
   .steps span.on { color: var(--accent); }
   .steps span.on::before { background: var(--grad-accent); color: #0a0a0f; font-weight: 700; }
+  .cupon__abrir { background: none; border: 0; color: var(--tx-mute); font-size: .82rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: .3rem 0; }
+  .cupon__abrir:hover { color: var(--accent); }
+  .cupon__box { display: flex; gap: .5rem; margin-top: .5rem; }
+  .cupon__box input { flex: 1; min-width: 0; padding: .6rem .8rem; font-size: .85rem; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 8px; text-transform: uppercase; }
+  .cupon__box input:focus { border-color: var(--accent); outline: none; }
+  #cuponMsg { margin: .5rem 0 0; }
+  #cuponMsg.ok { color: var(--ok); }
+  #cuponMsg.err { color: var(--danger); }
 </style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inscripción — Infinit Academy">
+<meta property="og:url" content="https://infinitstock.netlify.app/academia/checkout.html">
+<meta property="og:image" content="https://infinitstock.netlify.app/academia/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Infinit Academy">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Inscripción — Infinit Academy">
+<meta name="twitter:image" content="https://infinitstock.netlify.app/academia/img/og.png">
 </head>
 <body>
 
@@ -67,6 +86,12 @@
       <span class="kicker" style="justify-content:center">Último paso</span>
       <h1 class="display t-1">Confirmá tu inscripción</h1>
     </div>
+
+    <!-- Aviso de preventa: se muestra solo si está activo en js/config.js -->
+    <div class="card mb-3 hide" id="preventaBox" style="border-color:rgba(var(--accent-rgb),.45)"></div>
+
+    <!-- Pedido a medio hacer: aparece si volvió sin terminar -->
+    <div class="card mb-3 hide" id="retomarBox" style="border-color:rgba(var(--accent-rgb),.45)"></div>
 
     <form class="co" id="coForm" novalidate>
 
@@ -113,29 +138,8 @@
         </div>
 
         <h2 class="display t-3 mt-3 mb-2">2 · Cómo querés pagar</h2>
-        <div class="stack" id="pagos">
-          <label class="paybox is-sel">
-            <input type="radio" name="pago" value="mercadopago" checked>
-            <div>
-              <b>Mercado Pago · Tarjeta de crédito o débito</b>
-              <p>Hasta 6 cuotas sin interés. También Rapipago y Pago Fácil en efectivo. El acceso se habilita apenas se acredita.</p>
-            </div>
-          </label>
-          <label class="paybox">
-            <input type="radio" name="pago" value="transferencia">
-            <div>
-              <b>Transferencia bancaria</b>
-              <p>Te paso el alias, transferís y mandás el comprobante por WhatsApp. Acceso el mismo día.</p>
-            </div>
-          </label>
-          <label class="paybox">
-            <input type="radio" name="pago" value="whatsapp">
-            <div>
-              <b>Coordinar por WhatsApp</b>
-              <p>Si preferís hablar antes de pagar, arreglamos por chat. Contesto yo, no un bot.</p>
-            </div>
-          </label>
-        </div>
+        <!-- Se arma solo con los medios que estén configurados en js/config.js -->
+        <div class="stack" id="pagos"></div>
 
         <div id="datosTransfer" class="datos mt-2 hide">
           <b class="mb-1" style="display:block">Datos para transferir</b>
@@ -167,7 +171,18 @@
           <div class="sum__row"><span id="sumLabel1">Curso</span><span id="sumP1"></span></div>
           <div class="sum__row hide" id="sumRowBump"><span>+ Segundo curso</span><span id="sumP2"></span></div>
           <div class="sum__row" style="color:var(--ok)"><span>Descuento de lanzamiento</span><span id="sumDesc"></span></div>
+          <div class="sum__row hide" style="color:var(--ok)" id="sumRowCupon"><span id="sumCuponLabel"></span><span id="sumCuponVal"></span></div>
           <div class="sum__row total"><span>Total</span><b id="sumTotal"></b></div>
+
+          <!-- Cupón de descuento -->
+          <div class="cupon mt-1">
+            <button type="button" class="cupon__abrir" id="cuponAbrir">¿Tenés un código de descuento?</button>
+            <div class="cupon__box hide" id="cuponBox">
+              <input type="text" id="cuponInput" placeholder="Ingresá tu código" autocomplete="off" spellcheck="false">
+              <button type="button" class="btn btn--sm" id="cuponBtn">Aplicar</button>
+            </div>
+            <p class="tiny hide" id="cuponMsg"></p>
+          </div>
           <p class="small muted" id="sumCuotas" style="margin-top:.4rem"></p>
 
           <button class="btn btn--primary btn--block btn--lg mt-2" type="submit" id="coBtn">
@@ -218,7 +233,10 @@
   </div>
 </div>
 
+<script src="js/config.js"></script>
 <script src="js/data.js"></script>
+<script src="js/track.js"></script>
+<script src="js/pagos.js"></script>
 <script src="js/app.js"></script>
 <script src="js/checkout.js"></script>
 </body>

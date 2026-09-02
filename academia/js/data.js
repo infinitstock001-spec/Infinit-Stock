@@ -571,6 +571,37 @@ const ACADEMY = {
   ],
 };
 
+/* --- Se aplica lo que pusiste en js/config.js ------------------
+   config.js es el archivo que editás vos. Lo de acá arriba son los
+   valores por defecto: si config.js trae un dato, gana el de config.
+   -------------------------------------------------------------- */
+(() => {
+  const C = typeof window !== 'undefined' ? window.IA_CONFIG : null;
+  if (!C) return;
+
+  if (C.whatsapp) ACADEMY.marca.whatsapp = C.whatsapp;
+  if (C.email) ACADEMY.marca.email = C.email;
+  if (C.instagram) ACADEMY.marca.instagram = C.instagram;
+  if (C.ciudad) ACADEMY.marca.ciudad = C.ciudad;
+
+  if (C.mercadopago) {
+    ACADEMY.pagos.mercadopago.activo = !!C.mercadopago.activo;
+    Object.assign(ACADEMY.pagos.mercadopago.links, C.mercadopago.links || {});
+  }
+
+  if (C.transferencia) {
+    const t = C.transferencia;
+    // Solo se ofrece transferencia si los datos están cargados de verdad.
+    ACADEMY.pagos.transferencia.activo = !!(t.alias && t.cbu);
+    if (t.alias) ACADEMY.pagos.transferencia.alias = t.alias;
+    if (t.cbu) ACADEMY.pagos.transferencia.cbu = t.cbu;
+    if (t.titular) ACADEMY.pagos.transferencia.titular = t.titular;
+    if (t.banco) ACADEMY.pagos.transferencia.banco = t.banco;
+  }
+
+  if (C.preventa) ACADEMY.config.preventa = C.preventa;
+})();
+
 /* --- Helpers globales ----------------------------------------- */
 const fmtARS = (n) => '$' + Number(n).toLocaleString('es-AR', { maximumFractionDigits: 0 });
 

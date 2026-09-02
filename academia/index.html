@@ -18,6 +18,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/academia.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+<meta property="og:url" content="https://infinitstock.netlify.app/academia/">
+<meta property="og:image" content="https://infinitstock.netlify.app/academia/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Infinit Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Infinit Academy — Cursos de Barbería y Tatuaje">
+<meta name="twitter:description" content="De cero a cobrar tus primeros trabajos. 114 clases en video, acceso de por vida y 15 días de garantía. Desde $9.900.">
+<meta name="twitter:image" content="https://infinitstock.netlify.app/academia/img/og.png">
 </head>
 <body>
 
@@ -42,6 +51,7 @@
       <a href="#precios">Precios</a>
       <a href="#alumnos">Alumnos</a>
       <a href="#faq">Preguntas</a>
+      <a href="clase-gratis.html">Clase gratis</a>
       <a href="campus/">Campus</a>
     </nav>
     <div class="nav__cta">
@@ -58,6 +68,7 @@
   <a href="#precios">Precios</a>
   <a href="#alumnos">Alumnos</a>
   <a href="#faq">Preguntas</a>
+  <a href="clase-gratis.html">Clase gratis</a>
   <a href="campus/">Campus</a>
   <a class="btn btn--primary" href="#precios">Empezar ahora</a>
 </div>
@@ -317,6 +328,7 @@
       <div class="cd__u"><b data-cd="s">00</b><span>Seg</span></div>
     </div>
 
+    <div class="card mb-3 hide" data-preventa style="border-color:rgba(var(--accent-rgb),.45);max-width:760px;margin-left:auto;margin-right:auto"></div>
     <div class="price-grid" data-planes="masterclass,barberia,tatuaje,combo"></div>
 
     <p class="center muted small mt-3 rv">
@@ -421,7 +433,9 @@
         </p>
       </div>
 
-      <form data-lead="clase-gratis" novalidate>
+      <form data-lead="clase-gratis" name="clase-gratis" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="clase-gratis">
+      <p class="hide"><label>No completar: <input name="bot-field"></label></p>
         <div class="grid g-2" style="gap:0 1rem">
           <div class="field">
             <label for="g-nombre">Tu nombre</label>
@@ -533,6 +547,7 @@
           <li><a href="#metodo">El método</a></li>
           <li><a href="#alumnos">Alumnos</a></li>
           <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="clase-gratis.html">Clase gratis</a></li>
           <li><a href="campus/">Campus de alumnos</a></li>
           <li><a href="../index.html">Infinit Stock (tienda)</a></li>
         </ul>
@@ -600,7 +615,9 @@
     <p class="muted small mb-2">
       Sin tarjeta y sin compromiso. Mirás una clase completa y decidís después.
     </p>
-    <form data-lead="clase-gratis" novalidate>
+    <form data-lead="clase-gratis" name="clase-gratis" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="clase-gratis">
+      <p class="hide"><label>No completar: <input name="bot-field"></label></p>
       <div class="field">
         <label for="x-nombre">Nombre</label>
         <input id="x-nombre" name="nombre" type="text" required placeholder="Tu nombre">
@@ -623,7 +640,10 @@
   </div>
 </div>
 
+<script src="js/config.js"></script>
 <script src="js/data.js"></script>
+<script src="js/track.js"></script>
+<script src="js/pagos.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

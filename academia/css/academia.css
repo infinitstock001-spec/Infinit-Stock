@@ -1466,6 +1466,12 @@ body:has(.buybar.is-on) .wa-float { bottom: 92px; }
 .rv-r { transform: translateX(32px); }
 .rv-s { transform: scale(.94); }
 
+/* En pantallas chicas la entrada lateral empuja la página a lo ancho
+   y aparece scroll horizontal. Ahí entran solo desde abajo. */
+@media (max-width: 900px) {
+  .rv-l, .rv-r { transform: translateY(28px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;

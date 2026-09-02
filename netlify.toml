@@ -1,0 +1,95 @@
+# ==============================================================
+# Configuración de Netlify — Infinit Stock + Infinit Academy
+# Sitio estático: no hay que compilar nada, se publica tal cual.
+# ==============================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# --------------------------------------------------------------
+# Atajos de URL para la bio de Instagram y los mensajes
+# Quedan cortos y se leen bien:
+#   infinitstock.netlify.app/gratis
+#   infinitstock.netlify.app/barberia
+# --------------------------------------------------------------
+[[redirects]]
+  from = "/academia"
+  to = "/academia/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/cursos"
+  to = "/academia/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/gratis"
+  to = "/academia/clase-gratis.html"
+  status = 301
+
+[[redirects]]
+  from = "/barberia"
+  to = "/academia/cursos/barberia.html"
+  status = 301
+
+[[redirects]]
+  from = "/tatuaje"
+  to = "/academia/cursos/tatuaje.html"
+  status = 301
+
+[[redirects]]
+  from = "/combo"
+  to = "/academia/checkout.html?plan=combo"
+  status = 301
+
+[[redirects]]
+  from = "/campus"
+  to = "/academia/campus/index.html"
+  status = 301
+
+# --------------------------------------------------------------
+# Cabeceras de seguridad
+# --------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+
+# El panel de carga no lo indexa ningún buscador
+[[headers]]
+  for = "/academia/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# --------------------------------------------------------------
+# Caché: las imágenes y el CSS/JS se guardan en el navegador,
+# el HTML siempre se vuelve a pedir para que veas los cambios ya.
+# --------------------------------------------------------------
+[[headers]]
+  for = "/academia/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
