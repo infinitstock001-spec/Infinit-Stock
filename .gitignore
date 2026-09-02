@@ -1,0 +1,9 @@
+# Dependencias de desarrollo: no hacen falta en el sitio publicado
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Carpetas de Netlify
+.netlify/
