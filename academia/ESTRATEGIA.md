@@ -196,14 +196,35 @@ dominio para que no se pueda compartir. Vale la pena cuando el curso ya te esté
 
 ---
 
-## 9. Lo que hay que cambiar antes de publicar
+## 9. Lo que falta completar
 
-Todo esto está en `js/data.js` salvo lo que diga otra cosa:
+El paso a paso operativo está en **[EMPEZAR-HOY.md](EMPEZAR-HOY.md)**. Acá va la lista corta.
 
-- [ ] `pagos.transferencia` — alias, CBU y titular reales (los actuales son de ejemplo)
-- [ ] `pagos.mercadopago.links` — los 5 links, y poner `activo: true`
+**En `js/config.js`** (el archivo de configuración):
+
+- [ ] `transferencia` — alias, CBU y titular reales. Mientras esté vacío, la web **no ofrece**
+      transferencia: prefiere no mostrar un medio de pago antes que mostrar datos falsos.
+- [ ] `mercadopago.links` — los links de pago, y `activo: true`
+- [ ] `metaPixel` — ponelo aunque todavía no hagas publicidad: desde el día uno empieza a
+      juntar la audiencia a la que después le vas a poder mostrar anuncios
+- [ ] `preventa.completo` — una fecha que puedas cumplir de verdad
+- [ ] `clavePanel` — cambiá la que viene por defecto
+
+**En `js/data.js`** (el contenido):
+
+- [ ] `testimonios` — **son de ejemplo.** Cambialos por los de alumnos reales apenas los
+      tengas, y poné `config.testimoniosDemo: false`. Mientras siga en `true`, la web avisa
+      abajo de la sección que son de muestra. Publicar testimonios inventados como si fueran
+      reales es publicidad engañosa y, si alguien lo descubre, te quema la marca.
 - [ ] `marca.instagram` — tu usuario real
-- [ ] `testimonios` — **son de ejemplo.** Cambialos por testimonios reales de alumnos apenas los tengas. Publicar testimonios inventados como si fueran reales es publicidad engañosa y, si alguien lo descubre, te quema la marca.
-- [ ] Los números de la landing ("900 alumnos", "4.8 de puntaje") — están en `index.html` y también son de ejemplo. Bajalos a tus números reales, aunque sean chicos. "Los primeros 20 alumnos" es más creíble y vende mejor que un 900 inventado.
-- [ ] Los videos, desde `/admin/`
-- [ ] Sacar o proteger `/admin/` antes de publicar (no tiene contraseña)
+
+**Lo demás:**
+
+- [ ] Grabar y cargar los videos desde `/admin/`
+- [ ] En Netlify: **Forms → Settings → Form notifications** para que los pedidos y las
+      consultas te lleguen al mail
+
+**Ya resuelto:** los números de la landing son reales (clases, horas, módulos, días de
+garantía); `/admin/` tiene traba con clave; los medios de pago se muestran solo si están
+configurados; y la web avisa que el curso está en preventa mientras `preventa.activo` esté
+en `true`.
