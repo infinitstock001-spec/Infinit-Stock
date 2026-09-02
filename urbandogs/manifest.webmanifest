@@ -1,0 +1,17 @@
+{
+  "name": "Urban Dog's — Panchos artesanales",
+  "short_name": "Urban Dog's",
+  "description": "Panchos artesanales con salchicha ahumada 12 horas y pan brioche del día. Pedí online en 3 clics.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0C0A09",
+  "theme_color": "#0C0A09",
+  "lang": "es-AR",
+  "categories": ["food", "shopping"],
+  "icons": [
+    { "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "img/og.png", "sizes": "1200x630", "type": "image/png", "purpose": "any" }
+  ]
+}

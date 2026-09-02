@@ -7,5 +7,6 @@ Disallow: /academia/campus/
 Disallow: /academia/checkout.html
 Disallow: /academia/gracias.html
 Disallow: /academia/forms.html
+Disallow: /urbandogs/gracias.html
 
 Sitemap: https://infinitstock.netlify.app/sitemap.xml

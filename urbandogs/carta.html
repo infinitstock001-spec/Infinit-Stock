@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta completa | Urban Dog's</title>
+<meta name="description" content="Carta completa de Urban Dog's: panchos artesanales, combos, papas, bebidas y postres con precios actualizados.">
+<meta name="theme-color" content="#0C0A09">
+<link rel="canonical" href="https://infinitstock.netlify.app/urbandogs/carta.html">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/urban.css">
+<style>
+  .carta-top { padding: 40px 0 24px; text-align: center; }
+  .carta-top .logo { justify-content: center; margin-bottom: 20px; }
+  .carta-sec { margin-bottom: 46px; }
+  .carta-sec h2 {
+    font-family: var(--f-display); font-size: clamp(1.6rem, 4vw, 2.4rem); text-transform: uppercase;
+    color: var(--mustard); margin-bottom: 4px; display: flex; align-items: center; gap: 12px;
+  }
+  .carta-sec h2::after { content: ''; flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+  .carta-sec > p { color: var(--text-dim); font-size: .9rem; margin-bottom: 20px; }
+  .carta-item {
+    display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: start;
+    padding: 16px 0; border-bottom: 1px dashed var(--line-soft);
+  }
+  .carta-item__art { width: 64px; border-radius: 10px; overflow: hidden; background: #191411; display: grid; place-items: center; }
+  .carta-item h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .carta-item p { font-size: .9rem; color: var(--text-soft); }
+  .carta-item__p { text-align: right; white-space: nowrap; }
+  .carta-item__p b { font-family: var(--f-display); font-size: 1.3rem; color: var(--mustard); display: block; line-height: 1; }
+  .carta-item__p s { font-size: .8rem; color: var(--text-dim); }
+  .carta-pie { padding: 30px 0 60px; text-align: center; color: var(--text-dim); font-size: .88rem; }
+  .carta-acciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 26px 0 40px; }
+  @media print {
+    body { background: #fff; color: #111; }
+    .carta-acciones, .carta-item__art { display: none; }
+    .carta-item { grid-template-columns: 1fr auto; }
+    .carta-sec h2, .carta-item__p b { color: #B8722C; }
+    .carta-item p { color: #444; }
+    a { color: #111; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="carta-top">
+    <a class="logo" href="index.html">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M4 18c0-4 2.6-6.4 6.4-6.4h11.2C25.4 11.6 28 14 28 18c0 2.4-1.4 3.6-3.4 3.6H7.4C5.4 21.6 4 20.4 4 18z" fill="#3D2A16"/>
+          <rect x="3" y="12.4" width="26" height="5.6" rx="2.8" fill="#B03A22"/>
+          <path d="M6.5 14.6c1.8-1.4 3.6 1.4 5.4 0s3.6 1.4 5.4 0 3.6 1.4 5.4 0 2.6.7 3.4.4" stroke="#FFF0C4" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo__text">Urban<span>Dog's</span><span class="logo__sub">Panchos artesanales</span></span>
+    </a>
+    <h1 class="sec__title">Carta completa</h1>
+    <p class="sec__sub" style="margin-inline:auto" id="carta-bajada"></p>
+    <div class="carta-acciones">
+      <a class="btn" href="index.html#menu">Pedir online</a>
+      <a class="btn btn--wa" id="carta-wa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      <button class="btn btn--ghost" type="button" onclick="window.print()">Imprimir carta</button>
+    </div>
+  </header>
+
+  <main id="carta"></main>
+
+  <footer class="carta-pie">
+    <p id="carta-datos"></p>
+    <p style="margin-top:8px">Precios en pesos argentinos, con IVA incluido. Sujetos a cambio sin previo aviso.</p>
+  </footer>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/art.js"></script>
+<script>
+(function () {
+  document.body.insertAdjacentHTML('afterbegin', UD_ART.defs());
+  var money = function (n) { return UD_CONFIG.ventas.moneda + Math.round(n).toLocaleString('es-AR'); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (m) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]; }); };
+
+  document.getElementById('carta-bajada').textContent = UD_CONFIG.marca.bajada;
+
+  var num = String(UD_CONFIG.contacto.whatsapp).replace(/\D/g, '');
+  document.getElementById('carta-wa').href = 'https://wa.me/' + num +
+    '?text=' + encodeURIComponent('¡Hola ' + UD_CONFIG.marca.nombre + '! Quiero hacer un pedido.');
+
+  var c = UD_CONFIG.contacto;
+  document.getElementById('carta-datos').textContent =
+    c.direccion + ' — ' + c.barrio + ' · ' + c.telefonoVisible + ' · ' + c.email;
+
+  var html = UD_CATEGORIAS.filter(function (cat) { return cat.id !== 'todos'; }).map(function (cat) {
+    var items = UD_MENU.filter(function (p) { return p.cat === cat.id && p.activo !== false; });
+    if (!items.length) return '';
+    return '<section class="carta-sec"><h2>' + cat.icono + ' ' + esc(cat.nombre) + '</h2>' +
+      items.map(function (p) {
+        var tags = (p.tags || []).map(function (t) {
+          var txt = { picante: '🌶️', veggie: '🌱', nuevo: '✨', top: '🔥' }[t] || '';
+          return txt ? '<span class="chip chip--' + t + '">' + txt + '</span>' : '';
+        }).join('');
+        return '<article class="carta-item">' +
+          '<div class="carta-item__art">' + UD_ART.paraProducto(p) + '</div>' +
+          '<div><h3>' + esc(p.nombre) + tags + '</h3><p>' + esc(p.desc) + '</p></div>' +
+          '<div class="carta-item__p">' + (p.antes ? '<s>' + money(p.antes) + '</s>' : '') +
+          '<b>' + money(p.precio) + '</b></div></article>';
+      }).join('') + '</section>';
+  }).join('');
+
+  document.getElementById('carta').innerHTML = html;
+})();
+</script>
+</body>
+</html>

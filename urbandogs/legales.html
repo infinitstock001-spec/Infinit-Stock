@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Términos y privacidad | Urban Dog's</title>
+<meta name="description" content="Términos y condiciones de compra y política de privacidad de Urban Dog's.">
+<meta name="theme-color" content="#0C0A09">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/urban.css">
+<style>
+  .legal { max-width: 780px; margin-inline: auto; padding: 50px 0 80px; }
+  .legal h1 { font-family: var(--f-display); font-size: clamp(2rem,5vw,3rem); text-transform: uppercase; margin-bottom: 10px; }
+  .legal h2 { font-family: var(--f-display); font-size: 1.35rem; text-transform: uppercase; color: var(--mustard); margin: 38px 0 12px; }
+  .legal p, .legal li { color: var(--text-soft); margin-bottom: 12px; }
+  .legal ul { padding-left: 20px; list-style: disc; }
+  .legal .aviso { padding: 16px 18px; border-radius: var(--r); background: rgba(226,62,51,.1);
+    box-shadow: inset 0 0 0 1px rgba(226,62,51,.3); font-size: .92rem; margin-bottom: 30px; }
+</style>
+</head>
+<body>
+<div class="wrap legal">
+  <a class="btn btn--sm btn--ghost" href="index.html" style="margin-bottom:26px">← Volver al sitio</a>
+  <h1>Términos y privacidad</h1>
+  <p style="color:var(--text-dim);font-size:.9rem">Última actualización: <span id="fecha"></span></p>
+
+  <div class="aviso">
+    <strong>Nota para el dueño del sitio:</strong> este texto es una base general y no reemplaza el asesoramiento
+    de un profesional. Revisalo con tu contador o abogado y ajustá los datos de la razón social, CUIT y domicilio
+    fiscal antes de publicarlo. Borrá este recuadro cuando esté listo.
+  </div>
+
+  <h2>1. Quiénes somos</h2>
+  <p><span id="marca"></span>, con domicilio comercial en <span id="dir"></span>, es responsable de la venta de los
+  productos ofrecidos en este sitio y del tratamiento de los datos que nos dejás.</p>
+
+  <h2>2. Pedidos</h2>
+  <p>Los pedidos se arman en la web y se confirman por WhatsApp. Un pedido se considera aceptado únicamente cuando
+  respondemos confirmándolo. Antes de esa confirmación podemos rechazarlo por falta de stock, por estar fuera de la
+  zona de reparto o por estar fuera del horario de atención.</p>
+  <p>Los precios que ves en la web son los vigentes al momento de la consulta e incluyen IVA. Podemos modificarlos
+  sin previo aviso, pero nunca después de haber confirmado tu pedido.</p>
+
+  <h2>3. Envíos y retiros</h2>
+  <p>Los tiempos de entrega son estimados y pueden variar según el clima, el tránsito y la demanda del momento.
+  Si vamos a demorar más de lo previsto te avisamos por WhatsApp antes de empezar a cocinar.</p>
+  <p>El costo de envío se informa antes de confirmar el pedido. También podés retirar por el local sin cargo.</p>
+
+  <h2>4. Pagos</h2>
+  <p>Aceptamos los medios de pago listados en el sitio. En pagos por transferencia el pedido sale una vez acreditado
+  el importe. En pagos en efectivo te pedimos que nos avises con cuánto abonás para llevarte el cambio.</p>
+
+  <h2>5. Cambios, devoluciones y reclamos</h2>
+  <p>Por tratarse de alimentos elaborados al momento, no aceptamos devoluciones una vez entregado el pedido, salvo que
+  el producto presente un defecto o no corresponda con lo solicitado.</p>
+  <p>Si algo salió mal, escribinos dentro de las 2 horas de recibido el pedido y lo resolvemos: reponemos el producto
+  o te devolvemos el importe. Nos vas a encontrar en el WhatsApp del sitio.</p>
+
+  <h2>6. Alérgenos</h2>
+  <p>Nuestros productos pueden contener o haber estado en contacto con gluten, leche, huevo, soja, frutos secos y
+  mostaza. Cocinamos en una cocina donde se manipula gluten, por lo que no podemos garantizar la ausencia de
+  contaminación cruzada. Si tenés una alergia o condición médica, avisanos antes de pedir.</p>
+
+  <h2 id="privacidad">7. Privacidad de tus datos</h2>
+  <p>Cuando completás un formulario o hacés un pedido guardamos únicamente lo necesario para atenderte: nombre,
+  teléfono, dirección de entrega, correo electrónico y las aclaraciones que nos dejes.</p>
+  <ul>
+    <li>No vendemos ni cedemos tus datos a terceros.</li>
+    <li>Los usamos para procesar tu pedido y, si nos diste tu mail, para avisarte de novedades y promociones.</li>
+    <li>Podés pedirnos que los borremos cuando quieras escribiéndonos al mail de contacto.</li>
+  </ul>
+  <p>El sitio guarda tu carrito y tus datos de entrega en el navegador (almacenamiento local) para que no tengas que
+  volver a escribirlos. Esa información queda en tu dispositivo y podés borrarla limpiando los datos del navegador.</p>
+  <p>Si están activadas las herramientas de medición (Google Analytics o el píxel de Meta), esos servicios pueden
+  usar cookies para analizar el uso del sitio de forma agregada.</p>
+
+  <h2>8. Propiedad intelectual</h2>
+  <p>La marca, los textos, las ilustraciones y el diseño de este sitio son de <span id="marca2"></span>. No pueden
+  reproducirse sin autorización.</p>
+
+  <h2>9. Contacto</h2>
+  <p>Ante cualquier duda sobre estos términos escribinos a <a id="mail" href="#" style="color:var(--mustard)"></a>
+  o por WhatsApp al <a id="tel" href="#" style="color:var(--mustard)"></a>.</p>
+</div>
+
+<script src="js/config.js"></script>
+<script>
+  var c = UD_CONFIG.contacto;
+  document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('marca').textContent = UD_CONFIG.marca.nombre;
+  document.getElementById('marca2').textContent = UD_CONFIG.marca.nombre;
+  document.getElementById('dir').textContent = c.direccion + ', ' + c.barrio;
+  var m = document.getElementById('mail'); m.textContent = c.email; m.href = 'mailto:' + c.email;
+  var t = document.getElementById('tel'); t.textContent = c.telefonoVisible;
+  t.href = 'https://wa.me/' + String(c.whatsapp).replace(/\D/g, '');
+</script>
+</body>
+</html>

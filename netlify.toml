@@ -49,6 +49,36 @@
   status = 301
 
 # --------------------------------------------------------------
+# Urban Dog's — atajos de URL para la bio de Instagram y el QR
+#   infinitstock.netlify.app/panchos
+#   infinitstock.netlify.app/carta
+# --------------------------------------------------------------
+[[redirects]]
+  from = "/urbandogs"
+  to = "/urbandogs/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/panchos"
+  to = "/urbandogs/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/pedir"
+  to = "/urbandogs/index.html#menu"
+  status = 301
+
+[[redirects]]
+  from = "/carta"
+  to = "/urbandogs/carta.html"
+  status = 301
+
+[[redirects]]
+  from = "/eventos"
+  to = "/urbandogs/index.html#eventos"
+  status = 301
+
+# --------------------------------------------------------------
 # Cabeceras de seguridad
 # --------------------------------------------------------------
 [[headers]]
@@ -71,6 +101,11 @@
 # --------------------------------------------------------------
 [[headers]]
   for = "/academia/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/urbandogs/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
 
