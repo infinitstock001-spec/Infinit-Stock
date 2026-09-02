@@ -956,6 +956,7 @@ svg.ud-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 .historia__tag--1 { left: -14px; top: 12%; transform: rotate(-4deg); animation: ud-hover 7s ease-in-out infinite; }
 .historia__tag--2 { right: -12px; bottom: 12%; transform: rotate(3deg); animation: ud-hover 9s ease-in-out infinite .8s; }
 
+.historia__txt .sec__title { margin-bottom: 24px; }
 .historia__txt p { color: var(--text-soft); margin-bottom: 18px; }
 .historia__firma {
   display: flex; align-items: center; gap: 14px; margin-top: 28px;
