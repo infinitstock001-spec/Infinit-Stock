@@ -19,6 +19,16 @@
   status = 200
 
 [[redirects]]
+  from = "/dburgers"
+  to = "/dburgers/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/burgers"
+  to = "/dburgers/index.html"
+  status = 301
+
+[[redirects]]
   from = "/cursos"
   to = "/academia/index.html"
   status = 301
@@ -71,6 +81,11 @@
 # --------------------------------------------------------------
 [[headers]]
   for = "/academia/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/dburgers/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
 
