@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D Burgers | Hamburguesas smash en Rosario — Beltrán y Villa Nueva</title>
+<meta name="description" content="Hamburguesas smash hechas al momento con carne fresca del día, pan brioche y salsas de la casa. Combos desde $12.500, delivery en 30-45 min y pedido directo por WhatsApp. Locales en Beltrán y Villa Nueva.">
+<meta name="theme-color" content="#08070a">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://infinitstock.netlify.app/dburgers/">
+
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:site_name" content="D Burgers">
+<meta property="og:title" content="D Burgers | Smash de verdad, hecha al momento">
+<meta property="og:description" content="Carne fresca sellada a la plancha, pan brioche y salsas de la casa. Combos desde $12.500 y delivery en 30-45 minutos. Pedí por WhatsApp.">
+<meta property="og:image" content="https://infinitstock.netlify.app/dburgers/img/americana.jpg">
+<meta property="og:image:width" content="828">
+<meta property="og:image:height" content="1253">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D Burgers | Smash de verdad">
+<meta name="twitter:description" content="Hamburguesas smash con carne fresca del día. Combos desde $12.500. Pedí por WhatsApp.">
+<meta name="twitter:image" content="https://infinitstock.netlify.app/dburgers/img/americana.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/molotov.jpg">
+<link rel="stylesheet" href="css/dburgers.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.92em%22 font-size=%2288%22>🍔</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "D Burgers",
+  "description": "Hamburguesería smash con carne fresca del día, pan brioche y salsas de la casa.",
+  "servesCuisine": ["Hamburguesas", "Comida rápida", "Smash burgers"],
+  "priceRange": "$$",
+  "image": "https://infinitstock.netlify.app/dburgers/img/americana.jpg",
+  "url": "https://infinitstock.netlify.app/dburgers/",
+  "acceptsReservations": "False",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "312" },
+  "hasMenu": {
+    "@type": "Menu",
+    "hasMenuSection": [{
+      "@type": "MenuSection",
+      "name": "Hamburguesas",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Americana",  "description": "Doble smash, cheddar, salsa D', lechuga, tomate y cebolla.", "offers": { "@type": "Offer", "price": "8500",  "priceCurrency": "ARS" } },
+        { "@type": "MenuItem", "name": "Molotov",    "description": "Doble smash, doble cheddar y guacamole fresco.",            "offers": { "@type": "Offer", "price": "9800",  "priceCurrency": "ARS" } },
+        { "@type": "MenuItem", "name": "Argenta",    "description": "Smash con provolone, salsa criolla y mayochimi.",           "offers": { "@type": "Offer", "price": "9800",  "priceCurrency": "ARS" } },
+        { "@type": "MenuItem", "name": "Bacon",      "description": "Doble smash, cheddar, bacon crocante y cebolla morada.",    "offers": { "@type": "Offer", "price": "9200",  "priceCurrency": "ARS" } },
+        { "@type": "MenuItem", "name": "Bluecheese", "description": "Roquefort, cebolla caramelizada, bacon y tomate.",          "offers": { "@type": "Offer", "price": "10400", "priceCurrency": "ARS" } }
+      ]
+    }]
+  },
+  "location": [
+    {
+      "@type": "Restaurant", "name": "D Burgers Beltrán", "telephone": "+543415123456",
+      "address": { "@type": "PostalAddress", "streetAddress": "Fray Luis Beltrán 1247", "addressLocality": "Rosario", "addressRegion": "Santa Fe", "addressCountry": "AR" },
+      "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "20:00", "closes": "00:30" }
+    },
+    {
+      "@type": "Restaurant", "name": "D Burgers Villa Nueva", "telephone": "+543414879012",
+      "address": { "@type": "PostalAddress", "streetAddress": "Entre Ríos 782", "addressLocality": "Rosario", "addressRegion": "Santa Fe", "addressCountry": "AR" },
+      "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "20:00", "closes": "00:30" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#principal" class="salto-link">Saltar al contenido</a>
+
+<!-- ===================== CINTA DE PROMO ===================== -->
+<div class="cinta-promo" id="cinta-promo"></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="contenedor nav__inner">
+    <a href="#inicio" class="nav__logo">
+      <span class="nav__marca" aria-hidden="true">🍔</span>
+      D<span class="oro">Burgers</span>
+    </a>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Menú principal">
+      <a class="nav__link" href="#carta" data-nav>Carta</a>
+      <a class="nav__link" href="#nosotros" data-nav>Nosotros</a>
+      <a class="nav__link" href="#combos" data-nav>Combos</a>
+      <a class="nav__link" href="#opiniones" data-nav>Opiniones</a>
+      <a class="nav__link" href="#preguntas" data-nav>Dudas</a>
+      <a class="nav__link" href="#locales" data-nav>Locales</a>
+      <button type="button" class="btn btn--sm btn--oro nav__cta" data-abrir-panel>
+        Mi pedido <span class="burbuja" data-contador hidden>0</span>
+      </button>
+    </nav>
+
+    <button class="nav__burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero__brasas" aria-hidden="true">
+      <span class="hero__brasa hero__brasa--1"></span>
+      <span class="hero__brasa hero__brasa--2"></span>
+      <span class="hero__brasa hero__brasa--3"></span>
+    </div>
+
+    <div class="contenedor hero__grid">
+      <div>
+        <span class="etiqueta">🔥 Smash · Beltrán &amp; Villa Nueva</span>
+        <h1 class="hero__titulo">
+          <span>Carne</span>
+          <span class="degradado">aplastada</span>
+          <span>al fuego</span>
+        </h1>
+        <p class="hero__texto">
+          Medallones de carne fresca aplastados sobre la plancha bien caliente para sellar
+          el jugo y armar esa costra dorada que hace la diferencia. Pan brioche, quesos que
+          se derriten de verdad y salsas hechas en casa.
+        </p>
+
+        <div class="hero__acciones">
+          <a class="btn btn--oro btn--grande" href="#carta">Armar mi pedido</a>
+          <a class="btn btn--wa btn--grande" href="#locales" data-wa target="_blank" rel="noopener">
+            <svg class="btn__ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.9-1.6-4-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.8 5 2.2.8 3 .9 4.1.7.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+
+        <p class="hero__estado"><span class="punto" aria-hidden="true"></span><span data-cocina></span></p>
+
+        <div class="hero__datos">
+          <div class="hero__dato"><strong>4,9★</strong><span>312 opiniones</span></div>
+          <div class="hero__dato"><strong>30-45'</strong><span>Delivery</span></div>
+          <div class="hero__dato"><strong>0</strong><span>Congelados</span></div>
+        </div>
+      </div>
+
+      <figure class="hero__figura">
+        <img src="img/molotov.jpg" width="828" height="1235" fetchpriority="high"
+             alt="Hamburguesa Molotov de D Burgers con guacamole, cheddar y doble medallón smash">
+        <figcaption class="hero__sello">Hecha al momento</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== SELLOS DE CONFIANZA ===================== -->
+  <div class="sellos-banda">
+    <div class="contenedor sellos" id="sellos"></div>
+  </div>
+
+  <!-- ===================== CARTA ===================== -->
+  <section class="seccion" id="carta">
+    <div class="contenedor">
+      <div class="encabezado-seccion encabezado-seccion--centro" data-revelar>
+        <span class="etiqueta">La carta</span>
+        <h2 class="titulo-seccion">Cada una con <span class="degradado">su despiece</span></h2>
+        <p class="bajada">
+          Tocá la foto para ver la hamburguesa por dentro, con cada ingrediente señalado.
+          Agregá lo que quieras y armá el pedido completo antes de mandarlo por WhatsApp.
+        </p>
+      </div>
+
+      <div class="filtros" id="filtros" data-revelar role="group" aria-label="Filtrar la carta"></div>
+      <div class="grilla" id="grilla-burgers" data-revelar></div>
+    </div>
+  </section>
+
+  <!-- ===================== NOSOTROS ===================== -->
+  <section class="seccion seccion--alt" id="nosotros">
+    <div class="contenedor nosotros">
+      <div class="nosotros__texto" data-revelar>
+        <span class="etiqueta">Nuestra historia</span>
+        <h2 class="titulo-seccion">Nacimos <span class="degradado">aplastando</span> carne</h2>
+        <p>
+          D Burgers empezó con una plancha, una espátula pesada y una idea bastante simple:
+          hacer la hamburguesa que nosotros queríamos comer. Nada de medallones armados el día
+          anterior ni de carne que llega congelada en una caja.
+        </p>
+        <p>
+          El estilo <strong>smash</strong> no es una moda: es una técnica. La bola de carne se
+          apoya sobre el hierro a temperatura máxima y se aplasta fuerte durante los primeros
+          segundos. Ahí pasa lo importante — la reacción de Maillard — y se forma esa costra
+          crocante y oscura que concentra todo el sabor mientras el centro queda jugoso.
+        </p>
+        <p>
+          Hoy tenemos dos locales, la misma plancha bien caliente y la misma obsesión de
+          siempre: que cada hamburguesa que sale por la ventanilla esté igual de bien hecha
+          que la primera.
+        </p>
+
+        <div class="pasos">
+          <div class="paso">
+            <span class="paso__ico" aria-hidden="true">🥩</span>
+            <div>
+              <h3>Carne fresca, molida el mismo día</h3>
+              <p>Corte con el punto justo de grasa para que el medallón quede jugoso, nunca seco.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <span class="paso__ico" aria-hidden="true">🔥</span>
+            <div>
+              <h3>Plancha al rojo y espátula pesada</h3>
+              <p>Aplastamos una sola vez, en el momento exacto. Ese golpe es el que arma la costra.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <span class="paso__ico" aria-hidden="true">🥖</span>
+            <div>
+              <h3>Pan brioche tostado en manteca</h3>
+              <p>Blando por dentro, dorado por fuera y firme para aguantar hasta el último bocado.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <span class="paso__ico" aria-hidden="true">🥫</span>
+            <div>
+              <h3>Salsas hechas por nosotros</h3>
+              <p>La Salsa D', el mayochimi y el guacamole se preparan acá, no vienen de un pote.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nosotros__collage" data-revelar>
+        <img src="img/argenta.jpg" width="828" height="1232" loading="lazy"
+             alt="Hamburguesa Argenta con provolone fundido y salsa criolla">
+        <img src="img/bacon.jpg" width="828" height="1243" loading="lazy"
+             alt="Hamburguesa Bacon con cheddar, panceta crocante y cebolla morada">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMBOS ===================== -->
+  <section class="seccion" id="combos">
+    <div class="contenedor">
+      <div class="encabezado-seccion encabezado-seccion--centro" data-revelar>
+        <span class="etiqueta">Promos y combos</span>
+        <h2 class="titulo-seccion">Hamburguesa, papas <span class="degradado">y bebida</span></h2>
+        <p class="bajada">
+          Elegís la hamburguesa que quieras de la carta y nosotros le sumamos las papas y
+          la bebida. Siempre sale más barato que pedirlo por separado.
+        </p>
+      </div>
+      <div class="combos" id="grilla-combos" data-revelar></div>
+
+      <div class="garantia" id="garantia" data-revelar></div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIOS ===================== -->
+  <section class="seccion seccion--alt" id="opiniones">
+    <div class="contenedor">
+      <div class="encabezado-seccion encabezado-seccion--centro" data-revelar>
+        <span class="etiqueta">Lo que dicen</span>
+        <h2 class="titulo-seccion">Clientes que <span class="degradado">vuelven</span></h2>
+        <div class="reputacion" id="reputacion"></div>
+      </div>
+      <div class="testimonios" id="grilla-testimonios" data-revelar></div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="seccion" id="preguntas">
+    <div class="contenedor contenedor--angosto">
+      <div class="encabezado-seccion encabezado-seccion--centro" data-revelar>
+        <span class="etiqueta">Antes de pedir</span>
+        <h2 class="titulo-seccion">Lo que <span class="degradado">siempre</span> preguntan</h2>
+        <p class="bajada">Y si te queda alguna duda, escribinos por WhatsApp que contestamos al toque.</p>
+      </div>
+      <div class="faq" id="faq" data-revelar></div>
+    </div>
+  </section>
+
+  <!-- ===================== LOCALES ===================== -->
+  <section class="seccion seccion--alt" id="locales">
+    <div class="contenedor">
+      <div class="encabezado-seccion encabezado-seccion--centro" data-revelar>
+        <span class="etiqueta">Dónde estamos</span>
+        <h2 class="titulo-seccion">Dos locales, <span class="degradado">una sola plancha</span></h2>
+        <p class="bajada">Elegí el que te queda más cerca y hacé tu pedido directo por WhatsApp.</p>
+      </div>
+      <div class="locales" id="grilla-locales" data-revelar></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__grid">
+      <div>
+        <a href="#inicio" class="nav__logo">
+          <span class="nav__marca" aria-hidden="true">🍔</span>
+          D<span class="oro">Burgers</span>
+        </a>
+        <p class="pie__texto">
+          Hamburguesas smash hechas al momento con carne fresca, pan brioche y salsas
+          de la casa. Beltrán y Villa Nueva, Rosario.
+        </p>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <ul>
+          <li><a href="#carta">La carta</a></li>
+          <li><a href="#nosotros">Nuestra historia</a></li>
+          <li><a href="#combos">Combos y promos</a></li>
+          <li><a href="#opiniones">Opiniones</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="#locales">Locales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pedidos</h4>
+        <ul>
+          <li><a href="#local-beltran">WhatsApp Beltrán</a></li>
+          <li><a href="#local-villa-nueva">WhatsApp Villa Nueva</a></li>
+          <li><a href="#locales">Delivery y retiro</a></li>
+          <li><a href="#" data-abrir-panel>Ver mi pedido</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__abajo">
+      <span>© <span id="anio">2026</span> D Burgers. Todos los derechos reservados.</span>
+      <span>Las fotos son de nuestros propios productos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FICHA DE PRODUCTO ===================== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div class="modal__fondo" id="modal-fondo"></div>
+  <div class="modal__caja" id="modal-caja"></div>
+</div>
+
+<!-- ===================== UPSELL ===================== -->
+<div class="upsell" id="upsell"></div>
+
+<!-- ===================== PANEL DEL PEDIDO ===================== -->
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Mi pedido">
+  <div class="panel__fondo" id="panel-fondo"></div>
+  <aside class="panel__caja">
+    <header class="panel__cabecera">
+      <h2 class="panel__titulo">Mi pedido</h2>
+      <button type="button" class="modal__cerrar" id="panel-cerrar" data-cerrar-panel aria-label="Cerrar">✕</button>
+    </header>
+    <div class="panel__cuerpo" id="panel-cuerpo"></div>
+    <footer class="panel__pie" id="panel-pie" hidden>
+      <a class="btn btn--wa btn--full btn--grande" id="panel-wa" href="#" target="_blank" rel="noopener">
+        <svg class="btn__ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.9-1.6-4-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.8 5 2.2.8 3 .9 4.1.7.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2"/></svg>
+        Enviar pedido por WhatsApp
+      </a>
+      <button type="button" class="panel__vaciar" id="vaciar-pedido">Vaciar el pedido</button>
+    </footer>
+  </aside>
+</div>
+
+<!-- ===================== BARRA FIJA DE PEDIDO ===================== -->
+<div class="barra-pedido" id="barra-pedido">
+  <div class="contenedor barra-pedido__inner">
+    <div class="barra-pedido__datos">
+      <strong id="barra-cant">0 productos</strong>
+      <span id="barra-total">$0</span>
+    </div>
+    <button type="button" class="btn btn--oro" data-abrir-panel>Ver mi pedido</button>
+  </div>
+</div>
+
+<!-- ===================== WHATSAPP FLOTANTE ===================== -->
+<a class="wa-flotante" id="wa-flotante" href="#locales" data-wa target="_blank" rel="noopener">
+  <svg class="btn__ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.9-1.6-4-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.8 5 2.2.8 3 .9 4.1.7.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2"/></svg>
+  <span>Pedir por WhatsApp</span>
+</a>
+
+<script src="js/datos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
