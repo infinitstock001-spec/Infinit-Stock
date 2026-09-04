@@ -95,11 +95,11 @@ body::before{
 
 .titulo-seccion{
   font-family:var(--fuente-titulo);
-  font-size:clamp(2.4rem, 6.4vw, 4.4rem);
+  font-size:clamp(3rem, 8.2vw, 5.2rem);
   text-transform:uppercase; letter-spacing:.01em;
   margin:18px 0 14px;
 }
-.bajada{ color:var(--texto-suave); max-width:62ch; font-size:1.03rem; }
+.bajada{ color:var(--texto-suave); max-width:62ch; font-size:1.18rem; }
 .encabezado-seccion{ margin-bottom:clamp(40px, 5vw, 64px); }
 .encabezado-seccion--centro{ text-align:center; }
 .encabezado-seccion--centro .bajada{ margin-inline:auto; }
@@ -198,7 +198,7 @@ body::before{
 }
 .hero__titulo{
   font-family:var(--fuente-titulo);
-  font-size:clamp(3rem, 10vw, 6.6rem);
+  font-size:clamp(3.6rem, 12vw, 8.2rem);
   text-transform:uppercase; line-height:.88; margin:16px 0 18px;
   text-shadow:0 22px 60px rgba(0,0,0,.7);
 }
@@ -249,6 +249,259 @@ body::before{
 }
 .cinta__pista span::after{ content:'●'; color:var(--brasa-clara); font-size:.6rem; }
 @keyframes correr{ to{ transform:translateX(-50%); } }
+
+/* Efecto interactivo en títulos */
+.hero__titulo, .titulo-seccion {
+  position: relative;
+  transition: all .4s cubic-bezier(.2,.8,.3,1);
+}
+
+.hero__titulo:hover, .titulo-seccion:hover {
+  text-shadow: 0 0 30px rgba(212,168,83,.6), 0 20px 40px rgba(0,0,0,.8);
+  letter-spacing: .03em;
+}
+
+/* Efecto glow en degradado */
+.degradado {
+  position: relative;
+  animation: brillar 3s ease-in-out infinite;
+}
+
+@keyframes brillar {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(212,168,83,.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(212,168,83,.8)); }
+}
+
+/* Texto que parpadea al entrar */
+.hero__titulo span {
+  display: inline-block;
+  animation: aparecer-span .8s cubic-bezier(.2,.8,.3,1) backwards;
+}
+
+.hero__titulo span:nth-child(1) { animation-delay: .1s; }
+.hero__titulo span:nth-child(2) { animation-delay: .3s; }
+.hero__titulo span:nth-child(3) { animation-delay: .5s; }
+
+@keyframes aparecer-span {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto hover en etiquetas */
+.etiqueta {
+  transition: all .3s cubic-bezier(.2,.8,.3,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.etiqueta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  transition: left .5s;
+}
+
+.etiqueta:hover::before { left: 100%; }
+.etiqueta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(212,168,83,.4);
+  border-color: var(--oro);
+}
+
+/* Efecto en números */
+[data-revelar] {
+  animation: revelar-fade .8s ease-out forwards;
+}
+
+@keyframes revelar-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto mousemove en tarjetas */
+.tarjeta {
+  perspective: 1000px;
+}
+
+.tarjeta:hover .tarjeta__foto img {
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* Brillo extra en oro */
+.oro {
+  text-shadow: 0 0 10px rgba(212,168,83,.4);
+  transition: text-shadow .3s;
+}
+
+.oro:hover {
+  text-shadow: 0 0 20px rgba(212,168,83,.8);
+}
+
+/* Botones con efecto */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,.1);
+  transition: left .4s;
+  z-index: -1;
+}
+
+.btn:hover::before { left: 100%; }
+
+/* Animación en precios */
+.precio {
+  animation: latido-precio .6s ease-out forwards;
+}
+
+@keyframes latido-precio {
+  from {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Sombra de brasa en elementos clave */
+.tarjeta, .combo, .testimonio, .local {
+  box-shadow: 0 18px 50px -16px rgba(0,0,0,.9), 0 4px 12px -2px rgba(212,168,83,.15);
+}
+
+.tarjeta:hover, .combo:hover, .testimonio:hover, .local:hover {
+  box-shadow: 0 28px 60px -12px rgba(212,168,83,.35), 0 8px 20px -2px rgba(0,0,0,.95);
+}
+
+/* Efecto glow en elementos */
+.hero__marca {
+  box-shadow: 0 0 20px rgba(212,168,83,.5);
+  animation: glow-box 2s ease-in-out infinite;
+}
+
+@keyframes glow-box {
+  0%, 100% { box-shadow: 0 0 20px rgba(212,168,83,.5); }
+  50% { box-shadow: 0 0 40px rgba(212,168,83,.8); }
+}
+
+/* Efecto de línea brillante en hover */
+.tarjeta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--oro), transparent);
+  transition: width .5s cubic-bezier(.2,.8,.3,1);
+}
+
+.tarjeta:hover::after { width: 100%; }
+
+/* Animación suave de entrada para secciones */
+.seccion {
+  animation: fade-in .8s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: .7; }
+  to { opacity: 1; }
+}
+
+/* Efecto de escala en cards */
+.tarjeta__foto:active {
+  transform: scale(.98);
+}
+
+/* Pulsación en botones */
+.btn:active {
+  animation: pulse-click .3s ease-out;
+}
+
+@keyframes pulse-click {
+  0% { transform: scale(1); }
+  50% { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+
+/* Efecto en ingredientes */
+.ingrediente {
+  animation: slide-in .4s cubic-bezier(.2,.8,.3,1) backwards;
+}
+
+.ingrediente:nth-child(1) { animation-delay: 0s; }
+.ingrediente:nth-child(2) { animation-delay: .05s; }
+.ingrediente:nth-child(3) { animation-delay: .1s; }
+.ingrediente:nth-child(4) { animation-delay: .15s; }
+.ingrediente:nth-child(5) { animation-delay: .2s; }
+.ingrediente:nth-child(6) { animation-delay: .25s; }
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto de fuego en badges destacados */
+.tarjeta__fuego {
+  animation: fuego-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes fuego-anim {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(-1deg); }
+}
+
+/* Hover en links del footer */
+.pie a {
+  position: relative;
+  display: inline-block;
+}
+
+.pie a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--oro);
+  transition: width .3s cubic-bezier(.2,.8,.3,1);
+}
+
+.pie a:hover::after { width: 100%; }
+
 @media (prefers-reduced-motion:reduce){
   .cinta__pista{ animation:none; } .hero__brasa,.hero__figura img{ animation:none; }
 }
@@ -525,6 +778,259 @@ body::before{
 /* Revelado al hacer scroll */
 [data-revelar]{ opacity:0; transform:translateY(28px); transition:opacity .7s, transform .7s; }
 [data-revelar].revelado{ opacity:1; transform:none; }
+
+/* Efecto interactivo en títulos */
+.hero__titulo, .titulo-seccion {
+  position: relative;
+  transition: all .4s cubic-bezier(.2,.8,.3,1);
+}
+
+.hero__titulo:hover, .titulo-seccion:hover {
+  text-shadow: 0 0 30px rgba(212,168,83,.6), 0 20px 40px rgba(0,0,0,.8);
+  letter-spacing: .03em;
+}
+
+/* Efecto glow en degradado */
+.degradado {
+  position: relative;
+  animation: brillar 3s ease-in-out infinite;
+}
+
+@keyframes brillar {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(212,168,83,.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(212,168,83,.8)); }
+}
+
+/* Texto que parpadea al entrar */
+.hero__titulo span {
+  display: inline-block;
+  animation: aparecer-span .8s cubic-bezier(.2,.8,.3,1) backwards;
+}
+
+.hero__titulo span:nth-child(1) { animation-delay: .1s; }
+.hero__titulo span:nth-child(2) { animation-delay: .3s; }
+.hero__titulo span:nth-child(3) { animation-delay: .5s; }
+
+@keyframes aparecer-span {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto hover en etiquetas */
+.etiqueta {
+  transition: all .3s cubic-bezier(.2,.8,.3,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.etiqueta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  transition: left .5s;
+}
+
+.etiqueta:hover::before { left: 100%; }
+.etiqueta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(212,168,83,.4);
+  border-color: var(--oro);
+}
+
+/* Efecto en números */
+[data-revelar] {
+  animation: revelar-fade .8s ease-out forwards;
+}
+
+@keyframes revelar-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto mousemove en tarjetas */
+.tarjeta {
+  perspective: 1000px;
+}
+
+.tarjeta:hover .tarjeta__foto img {
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* Brillo extra en oro */
+.oro {
+  text-shadow: 0 0 10px rgba(212,168,83,.4);
+  transition: text-shadow .3s;
+}
+
+.oro:hover {
+  text-shadow: 0 0 20px rgba(212,168,83,.8);
+}
+
+/* Botones con efecto */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,.1);
+  transition: left .4s;
+  z-index: -1;
+}
+
+.btn:hover::before { left: 100%; }
+
+/* Animación en precios */
+.precio {
+  animation: latido-precio .6s ease-out forwards;
+}
+
+@keyframes latido-precio {
+  from {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Sombra de brasa en elementos clave */
+.tarjeta, .combo, .testimonio, .local {
+  box-shadow: 0 18px 50px -16px rgba(0,0,0,.9), 0 4px 12px -2px rgba(212,168,83,.15);
+}
+
+.tarjeta:hover, .combo:hover, .testimonio:hover, .local:hover {
+  box-shadow: 0 28px 60px -12px rgba(212,168,83,.35), 0 8px 20px -2px rgba(0,0,0,.95);
+}
+
+/* Efecto glow en elementos */
+.hero__marca {
+  box-shadow: 0 0 20px rgba(212,168,83,.5);
+  animation: glow-box 2s ease-in-out infinite;
+}
+
+@keyframes glow-box {
+  0%, 100% { box-shadow: 0 0 20px rgba(212,168,83,.5); }
+  50% { box-shadow: 0 0 40px rgba(212,168,83,.8); }
+}
+
+/* Efecto de línea brillante en hover */
+.tarjeta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--oro), transparent);
+  transition: width .5s cubic-bezier(.2,.8,.3,1);
+}
+
+.tarjeta:hover::after { width: 100%; }
+
+/* Animación suave de entrada para secciones */
+.seccion {
+  animation: fade-in .8s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: .7; }
+  to { opacity: 1; }
+}
+
+/* Efecto de escala en cards */
+.tarjeta__foto:active {
+  transform: scale(.98);
+}
+
+/* Pulsación en botones */
+.btn:active {
+  animation: pulse-click .3s ease-out;
+}
+
+@keyframes pulse-click {
+  0% { transform: scale(1); }
+  50% { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+
+/* Efecto en ingredientes */
+.ingrediente {
+  animation: slide-in .4s cubic-bezier(.2,.8,.3,1) backwards;
+}
+
+.ingrediente:nth-child(1) { animation-delay: 0s; }
+.ingrediente:nth-child(2) { animation-delay: .05s; }
+.ingrediente:nth-child(3) { animation-delay: .1s; }
+.ingrediente:nth-child(4) { animation-delay: .15s; }
+.ingrediente:nth-child(5) { animation-delay: .2s; }
+.ingrediente:nth-child(6) { animation-delay: .25s; }
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Efecto de fuego en badges destacados */
+.tarjeta__fuego {
+  animation: fuego-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes fuego-anim {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(-1deg); }
+}
+
+/* Hover en links del footer */
+.pie a {
+  position: relative;
+  display: inline-block;
+}
+
+.pie a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--oro);
+  transition: width .3s cubic-bezier(.2,.8,.3,1);
+}
+
+.pie a:hover::after { width: 100%; }
+
 @media (prefers-reduced-motion:reduce){
   [data-revelar]{ opacity:1; transform:none; }
   html{ scroll-behavior:auto; }

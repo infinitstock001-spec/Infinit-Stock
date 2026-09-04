@@ -26,6 +26,32 @@
 
   const buscarLocal = (id) => CONFIG.locales.find(l => l.id === id) || CONFIG.locales[0];
 
+
+  /* Animar números */
+  function animar(num) {
+    if (!!window.animado_nums) return;
+    window.animado_nums = true;
+    $$('[data-target]').forEach(el => {
+      const fin = parseInt(el.dataset.target);
+      const prefijo = el.dataset.prefix || '';
+      let actual = 0;
+      const paso = Math.ceil(fin / 50);
+      const i = setInterval(() => {
+        actual += paso;
+        if (actual >= fin) { actual = fin; clearInterval(i); }
+        el.textContent = prefijo + actual.toLocaleString('es-AR');
+      }, 30);
+    });
+  }
+  
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((e) => {
+      if (e[0].isIntersecting) { animar(); obs.disconnect(); }
+    });
+    const hero = $('#hero-stats');
+    if (hero) obs.observe(hero);
+  }
+
   /* Arma el link de WhatsApp. Si todavía no hay número cargado,
      devuelve el ancla a la sección de locales para no dejar un botón muerto. */
   function linkWhatsapp(idLocal, mensaje) {
@@ -371,6 +397,22 @@
   /* ==========================================================================
      Arranque
      ========================================================================== */
+
+  /* Efecto parallax suave en brasas */
+  function parallax() {
+    if (!('IntersectionObserver' in window)) return;
+    const brasas = $$('.hero__brasa');
+    if (!brasas.length) return;
+    window.addEventListener('scroll', () => {
+      const scroll = window.scrollY;
+      brasas.forEach((b, i) => {
+        const vel = .3 + i * .1;
+        b.style.transform = `translate3d(0, ${scroll * vel}px, 0)`;
+      });
+    }, { passive: true });
+  }
+  parallax();
+
   document.addEventListener('DOMContentLoaded', () => {
     avisoBorrador();
     nav();
