@@ -19,6 +19,16 @@
   status = 200
 
 [[redirects]]
+  from = "/master"
+  to = "/master-barberia/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/masterbarberia"
+  to = "/master-barberia/index.html"
+  status = 301
+
+[[redirects]]
   from = "/dburgers"
   to = "/dburgers/index.html"
   status = 200
@@ -86,6 +96,11 @@
 
 [[headers]]
   for = "/dburgers/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/master-barberia/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
 
